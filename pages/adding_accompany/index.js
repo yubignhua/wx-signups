@@ -133,8 +133,6 @@ Page({
         content: '请填写正确的用户名',
         showCancel: false,
         confirmColor: "#000000"
-
-
       })
       nameState = false
     } else {
