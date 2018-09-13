@@ -30,14 +30,14 @@
             {
               "pagePath": "pages/index/index",
               "text": "报名",
-              "iconPath": "images/index-icon.png",
-              "selectedIconPath": "images/index-icon.png"
+              "iconPath": "images/s_tab_icon_1.png",
+              "selectedIconPath": "images/s_tab_icon_2.png"
             },
             {
               "pagePath": "pages/order/index",
               "text": "订单",
-              "iconPath": "images/person-center.png",
-              "selectedIconPath": "images/person-center.png"
+              "iconPath": "images/s_tab_icon_3.png",
+              "selectedIconPath": "images/s_tab_icon_4.png"
             }
         ]
       },

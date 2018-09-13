@@ -7,7 +7,7 @@
     </view>
     <button wx:else class="check-order" bindtap="checkOrder">
       <view class="order-price">查订单</view>
-      <image src="../../images/right_arrow.png"></image>
+      <image src="../../images/s_right_arrow.png"></image>
     </button>
   </view>
 
@@ -21,17 +21,16 @@
       <button class="flex-layout order-code" bindtap="changeCodeModel" data-visible="{{true}}">
         <view>验票展示二维码</view>
         <view>
-          <image wx:if="{{orderList.authoname}}" src="../../images/xxxhdpiselectbox_select@3x.png" class="code-img"></image>
-          <image wx:else src="../../images/button_delete@3x.png" class="code-img" ></image>
-          <image wx:if="{{orderList.authoname}}" src="../../images/right_arrow.png" class="arrow-img"></image>
-          <image wx:else src="../../images/right_arrow.png" class="arrow-img" ></image>
+          <image wx:if="{{orderList.authoname}}" src="../../images/s_qr_2.png" class="code-img"></image>
+          <image wx:else src="../../images/s_qr_1.png" class="code-img" ></image>
+          <image src="../../images/s_right_arrow.png" class="arrow-img"></image>
         </view>
       </button>
       <button class="flex-layout order-code" bindtap="toEmpower">
         <view>找人代领</view>
         <view class="empower">
           <view>{{orderList.authoname?orderList.authoname:'未授权'}}</view>
-          <image src="../../images/right_arrow.png" class="arrow-img"></image>
+          <image src="../../images/s_right_arrow.png" class="arrow-img"></image>
         </view>
       </button>
     </view>
@@ -81,13 +80,9 @@
   <!-- 查订单   -->
     <button class="check-order space-item" bindtap="changeModel" data-visible="{{true}}">
       <view class="order-price" >查订单</view>
-      <image src="../../images/right_arrow.png"></image>
+      <image src="../../images/s_right_arrow.png"></image>
     </button>
-  <!-- 报名统计   -->
-    <button class="check-order space-item" bindtap="showSignPeople">
-      <view class="order-price">报名统计</view>
-      <image src="../../images/right_arrow.png"></image>
-    </button>
+    
   </view>
 
   <view class="model {{modelState?'':'hide-model'}}">

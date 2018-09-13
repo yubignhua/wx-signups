@@ -1,47 +1,42 @@
-<view class="index-container">
-  <view class="top">
-    <view class="title">
-      <view>2018年阿拉善英雄会</view>
-      <view>梦回阿拉善</view>
-      <view>今年我们再次踏上征程</view>
-      <view>报名活动已经全面展开！</view>
-    </view>
-    <view class="details">
-      <view>地点：阿拉善梦想公园</view>
-      <view >2018年10月1日—10月5日</view>
-    </view>
+<view class="index-container" 
+style="background-image:url('../../images/s_index_2.png');background-size:100% 100%">
+  <view class="top-logo">
+    <image src="../../images/s_index_1.png"></image>
   </view>
-  
-  <view class="bottom">
-    <view class="{{agree? 'bottom-hide':''}}">
-      <view class="select-title">选择入口</view>
-      <view class="select-button">
-        <picker bindchange="bindTeamChange" 
+
+  <view class="title">
+    <image src="../../images/s_index_3.png"></image>
+  </view>
+
+  <view class="info">
+    <view>地点：阿拉善左旗沙漠梦想汽车公园</view>
+    <view>时间：10月1日  至  10月5日</view>
+  </view>
+
+  <view class="select-team">
+    <picker bindchange="bindTeamChange" 
                 value="{{teamList[team].groupid}}" 
                 range="{{teamList}}"
                 range-key="{{'newName'}}">
-          <button class="team {{teamButton? 'button-slected': ''}}">
-            {{teamList[team].newName }}
-            <image wx:if="{{!teamButton}}" src="../../images/arrow_top_donw@3x.png"></image>
-            <image wx:else src="../../images/arrow_down-1.png"></image>
-          </button>
-        </picker>
-        <button class="person {{personButton? 'button-slected': ''}}" bindtap="clickPerson">散客</button>
-      </view>
-      <button class="sign-up {{signButton? 'button-slected': ''}}" bindtap="changeModel" data-visible="{{true}}">立即报名</button>
-    </view>
-    
-    <view class="{{!agree? 'bottom-hide':''}}">
-       <view class="select-title">{{ teamButton?teamList[team].newName : '散客' }}</view>
-       <view class="select-button">
-        <button class="continue-button" open-type="getPhoneNumber" bindgetphonenumber="toNextPage">继续报名</button>
-        <button class="count-button" bindtap="countSignUp">
-          报名统计
-        </button>
-       </view>
-    </view>
-    
+      <button class="team">
+        <view>{{teamList[team].newName }}</view>
+        <image src="../../images/s_index_4.png"></image>
+      </button>
+    </picker>
+    <button class="sign-up" bindtap="changeModel" data-visible="{{true}}">立即报名</button>
   </view>
+
+  <view class="other-title">
+    <image src="../../images/s_index_5.png"></image>
+  </view>
+
+  <button class="person-sign-up" bindtap="clickPerson" data-visible="{{true}}">散客报名</button>
+  
+  <view class="bottom-logo">
+    <image src="../../images/s_index_6.png"></image>
+  </view>
+
+
   <view class="model {{showModel?'':'hide-model'}}">
       <image src="../../images/popbox_closed@3x.png" bindtap="changeModel" data-visible="{{false}}"></image>
   </view>

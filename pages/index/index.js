@@ -8,25 +8,21 @@ Page({
     data: {
       teamList: [{
         groupid: 0,
-        newName: '请选择俱乐部',
+        newName: '请选择大队',
         num: 10
       }],
       competitionList:null,
       team: 0,
-      teamButton: false,
-      personButton: false,
       signButton: false,
       showModel: false,
       agree: false,
-      count: 0
+      count: 0,
+      signType: 0
     },
     
     onLoad(options) {
         this.getCompetition();
         this.getTeamList();
-
-        //this.getCount();
-      
     },
     
 
@@ -71,17 +67,6 @@ Page({
     },
 
   /**
-   * 获取报名人数
-   */
-  getCount(){
-    wx.pro.request({
-      url: ''
-    }).then((res) => {
-      this.data.count = res.data;
-    })
-  },
-
-  /**
    * 选择俱乐部Picker
    */
   bindTeamChange (e) {
@@ -89,9 +74,7 @@ Page({
         teamList = this.data.teamList;
     this.setData({
       team: selectedValue,
-      teamButton: selectedValue == 0 ? false : true,
-      signButton: selectedValue == 0 ? false : true,
-      personButton: false
+      signButton: selectedValue == 0 ? false : true
     })
    
     if ( teamList.length && !teamList[selectedValue].num ) {
@@ -102,7 +85,6 @@ Page({
         confirmColor: '#000000',
         success: () => {
           this.setData({
-            teamButton: false,
             signButton: false 
           }) }
       })
@@ -115,20 +97,21 @@ Page({
    */
   clickPerson() {
     this.setData({
-      teamButton: false,
-      personButton: true,
       signButton: true,
-      team: 0
+      team: 0,
+      showModel: true,
+      signType: 0
     })
   },
 
   /**
-   * 报名须知
+   * 选择大队
    */
   changeModel(event) {
     this.data.signButton?
       this.setData({
-        showModel: event.target.dataset.visible
+        showModel: event.target.dataset.visible,
+        signType: 1
       }):null;
   },
 
@@ -136,23 +119,11 @@ Page({
     this.setData({
       showModel: false
     })
-    app.globalData.signUpData.group_id = this.data.teamButton?this.data.teamList[this.data.team].groupid:0;
-    app.globalData.signUpData.group_name = this.data.teamButton?this.data.teamList[this.data.team].name:'';
+    app.globalData.signUpData.group_id = this.data.signType?this.data.teamList[this.data.team].groupid:0;
+    app.globalData.signUpData.group_name = this.data.signType?this.data.teamList[this.data.team].name:'';
     wx.navigateTo({
       url: "../adding_vehicles/index"
     })
-    
-  },
-
-  countSignUp() {
-    wx.showModal({
-      content: `当前报名人数：${this.data.count}`,
-      showCancel: false,
-      confirmText: '知道了',
-      confirmColor: '#000000'
-    })
   }
-
-  
 })
 

@@ -1,6 +1,6 @@
 <view>
   <view>
-    <image src="../../images/step3.png" class="complate-image"></image>
+    <image src="../../images/s_complate_step3.png" class="complate-image"></image>
   </view> 
   <view class="complate-title">
     <view class="complate-title-contant">报名成功</view>
@@ -9,7 +9,7 @@
   <view class="complate-map">
     <button class="complate-map-button">
       <view>英雄会智能地图</view>
-      <image src="../../images/icon_nav@3x.png"></image>
+      <image src="../../images/s_complate_icon.png"></image>
     </button>
   </view> 
   <view class="to-order">

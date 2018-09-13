@@ -4,9 +4,9 @@ page {
 
 .index-container{
   font-family: PingFangSC-Semibold;
-  position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .top{
   position: absolute;
@@ -147,4 +147,93 @@ page {
 }
 .hide-model{
   display: none;
+}
+
+
+
+.top-logo image{
+  width: 232rpx;
+  height: 199rpx;
+  margin: 55rpx 259rpx 0;
+}
+
+.title image{
+  width: 557rpx;
+  height: 142rpx;
+  margin: 24rpx 80rpx 19rpx 93rpx;
+}
+
+.info{
+  font-size: 22rpx;
+  color: #FFFFFF;
+  margin-left: 194rpx;
+  padding-bottom: 5rpx;
+}
+
+.select-team{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200rpx;
+}
+.team{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 464rpx;
+  height: 98rpx;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: 40rpx;
+}
+.team view{
+  font-size: 30rpx;
+  color: #BABABA;
+  padding-left: 40rpx;
+}
+.team image{
+  width: 22rpx;
+  height: 22rpx;
+  padding-right: 35rpx;
+}
+
+.sign-up{
+  width: 240rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 30rpx;
+  color: #000000;
+  font-weight: 600;
+  background: #F5D000;
+  padding: 0;
+  margin: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-right: 45rpx;
+  opacity: 1;
+}
+
+.other-title image{
+  width: 514rpx;
+  height: 24rpx;
+  padding: 33rpx 118rpx 13rpx;
+}
+.person-sign-up{
+  width: 280rpx;
+  height: 85rpx;
+  line-height: 85rpx;
+  margin: 0 235rpx;
+  padding: 0;
+  background: #000;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  border-radius: 19rpx;
+}
+
+.bottom-logo image{
+  width: 198rpx;
+  height: 40rpx;
+  margin: 60rpx 276rpx 23rpx;
 }
