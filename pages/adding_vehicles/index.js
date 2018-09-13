@@ -6,7 +6,7 @@ Page({
   data: {
     toView: 'red',
     scrollTop: 100,
-    CarsList: [{ name: '', iden: '', phone: '', e_id:''}],//控制表单数量的状态
+    CarsList: [{ name: '', iden: '', phone: '', e_id: '' }],//控制表单数量的状态
     flagList: [false],
     indicatorDots: false,
     current:0,
@@ -23,12 +23,23 @@ Page({
     nextFlag:true
 
   },
-  onLoad(options) {
 
+  onShow: function () {
+    // let receInfo = app.globalData.signUpData.detail.racer_info;
+    // if (receInfo.length === 0){
+    //   this.setData({
+    //     CarsList: [{ name: '', iden: '', phone: '', e_id: '' }]
+    //   })
+    // }else{
+    //   let datalist = receInfo;
+    //   //datalist.push({ name: '', iden: '', phone: '', e_id: '' })
+    //   this.setData({
+    //     CarsList: datalist
+    //   })
+    // }
   },
-  onShow() {
-  
-  },
+
+
   /**
    * 表单提交
    */
@@ -37,13 +48,12 @@ Page({
 
   },
 
-
   /**
    * 删除车辆
    */
   deleteCar(event){
     var index = event.currentTarget.dataset['index'];
-    console.log('index:::',index)
+    //console.log('index:::',index)
     this.data.dataList.splice(index, 1);
     this.data.CarsList.splice(index, 1);
     this.data.flagList.splice(index, 1);
@@ -59,7 +69,9 @@ Page({
       current: curState,
     })
   },
-
+  /**
+   * 校验表单
+   */
   checkInput: function (mData){
     const pattrnName = /^([a-zA-Z\u4e00-\u9fa5\·]{1,10})$/,
           pattrnId = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
@@ -119,16 +131,13 @@ Page({
     if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
       return
     }
-
     this.checkPerson(this.data.mData,res=>{
-      
       //this.data.CarsList[this.data.current] = this.data.mData;
       this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData)
       this.data.dataList.push(this.data.mData);
       // this.data.flagList.push(false)
       // this.data.flagList[this.data.flagList.length - 2] = true;
       this.data.flagList.splice(this.data.flagList.length - 1, 0, true)
-
       this.setData({
         CarsList: this.data.CarsList,
         current: this.data.CarsList.length - 1,
@@ -166,11 +175,6 @@ Page({
       }
     })
   },
-
-
-
-
-
   change1(e){
     this.data.lastData.name = e.detail.value;
   },
@@ -193,18 +197,28 @@ Page({
     if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
       return
     }
-
+    this.setData({
+      nextFlag: false
+    })
     this.checkPerson(this.data.lastData,res => {
       this.data.dataList.push(this.data.lastData);
       app.globalData.signUpData.detail.racer_info = this.data.dataList;
-      this.data.nextFlag = false;
-      //页面跳转
-      wx.navigateTo({
-        url: "../adding_accompany/index"
+      this.setData({
+        nextFlag: true,
+        lastData:{}
       })
+      //页面跳转
+      wx.redirectTo({
+        url: '../adding_accompany/index'
+      })
+      // wx.navigateTo({
+      //   url: "../adding_accompany/index"
+      // })
     },res=>{
       //验证失败
-      this.data.nextFlag = true;
+      this.setData({
+        nextFlag: true
+      })
       wx.showToast({
         title: "实名认证失败"
       })
