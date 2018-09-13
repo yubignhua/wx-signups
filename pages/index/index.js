@@ -151,31 +151,8 @@ Page({
       confirmText: '知道了',
       confirmColor: '#000000'
     })
-  },
-
-  /**
-   * 获取手机号并跳转
-   */
-  toNextPage(e) {
-    // if (e.detail.errMsg ==='getPhoneNumber:ok'){
-    //   wx.pro.request({
-    //     url: '',
-    //     method: 'POST',
-    //     data: {
-    //       code: app.globalData.code,
-    //       encryptedData: e.detail.encryptedData,
-    //       iv: e.detail.iv
-    //     }
-    //   }).then((res) => {
-    //     app.globalData.entry_info.mobile = res.phoneNumber;
-    //     wx.redirectTo({
-    //       url: "../adding_vehicles/index"
-    //     })
-    //   })
-    // }
-    wx.navigateTo({
-        url: "../adding_vehicles/index"
-    })
   }
+
+  
 })
 

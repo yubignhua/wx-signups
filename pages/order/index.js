@@ -5,7 +5,7 @@ let orderUrl = base_url.baseUrl + '/order/getDetail'
 
 Page({
     data: {
-      orderList: [{
+      orderList: {
         orderid: 12345,
         qrurl:'',
         groupname: '北京大队',
@@ -26,16 +26,7 @@ Page({
         },
         suixing_info: {
           price: 120,
-          info: [{
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }, {
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }, {
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }]
+          info: []
         },
         goods:{
           allNum: 4,
@@ -53,7 +44,7 @@ Page({
         },
         total: 900,
         signPeople: 30
-      }],
+      },
       checkState: false,
       modelState: false,
       scrollState: true,
@@ -79,14 +70,14 @@ Page({
         data: {orderid: params},
         method: 'POST'
       }).then(( res )=>{
-        let gift = res.data[0].goods.gift;
+        let gift = res.data.data && res.data.data.goods.gift;
         let giftNum = 0;
-        if (gift.length) {
+        if (gift && gift.length) {
           gift.map((item, index) => {
             giftNum += item.num
           })
         }
-        res.data[0].goods.allNum = giftNum;
+        res.data.data.goods.allNum = giftNum;
         this.setData({
           orderList: res.data.data
         })
@@ -98,7 +89,7 @@ Page({
      */
   changeCodeModel(e){
     console.log(e)
-    if ( !this.data.orderList[0].authoname ){
+    if ( !this.data.orderList.authoname ){
       this.setData({
         showCode: e.target.dataset.visible
       })
@@ -151,7 +142,7 @@ Page({
    */
   showSignPeople () {
     wx.showModal({
-      content: `当前报名人数：${this.data.orderList[0].signPeople}`,
+      content: `当前报名人数：${this.data.orderList.signPeople}`,
       showCancel: false,
       confirmText: '知道了',
       confirmColor: '#000000'
@@ -165,9 +156,9 @@ Page({
   },
 
   toEmpower(){
-    if (!this.data.orderList[0].authoname){
+    if (!this.data.orderList.authoname){
       wx.navigateTo({
-        url: `../empower/index?name=${this.data.orderList[0].groupname}&id=${this.data.orderList[0].teamId}`
+        url: `../empower/index?name=${this.data.orderList.groupname}&id=${this.data.orderList.teamId}`
       })
     }else{
       wx.showToast({
