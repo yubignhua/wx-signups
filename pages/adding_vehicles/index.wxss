@@ -1,0 +1,135 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.container {
+  font-family: PingFangSC-Semibold;
+}
+
+.warm-tip {
+  font-size: 22rpx;
+  color: #bebebe;
+}
+
+.doctor-img {
+  width: 100%;
+  height: 210rpx;
+  padding: 48rpx 105rpx 40rpx 105rpx;
+  box-sizing: border-box;
+}
+
+.form-wrapper {
+  margin: 50rpx 20rpx 36rpx 20rpx;
+  background: white;
+  border-radius: 20rpx;
+  position: relative;
+  padding-bottom:40rpx;
+  position: relative
+}
+
+.form-des {
+  padding-top: 40rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #bebebe;
+}
+
+.left-block {
+  display: inline-block;
+  border: solid 3px #ffd446;
+  height: 15rpx;
+  margin-right: 23rpx;
+}
+
+.right-left-img {
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.section {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+
+.item-input {
+  height: 90rpx;
+  width: 80%;
+  border: 1px solid #e6e6e6;
+  border-radius: 45px;
+  padding-left: 40rpx;
+  text-align: left;
+}
+.phcolor{
+    text-align: left;
+    font-size: 30rpx;
+    color: #000;
+}
+
+.grey .phcolor{
+    
+  color: #999999; 
+}
+
+input:disabled{
+background-color:#F5F5F5;
+color:#ACA899;
+}
+input[disabled],input:disabled{
+background-color:#F5F5F5;
+color:#ACA899;
+}
+
+
+
+
+
+.m-swiper{
+  height: 880rpx;}
+.next{
+  background: #FFD446;
+  height: 110rpx;
+  color:32rpx;
+  line-height:110rpx; 
+  border-radius: 0;
+  position: fixed;
+  bottom:0;
+  width: 100%;
+
+}
+.add_car{
+  width: 70rpx;
+  height:70rpx;
+  padding-right: 17rpx;
+}
+.button-hover {
+  background-color: none
+}
+.add_car button{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+
+.add_car .carimg{
+  width: 100%;
+  height:100%;
+}
+.add_car_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:24rpx;
+}
+.delete{
+  position: absolute;
+  top: 30rpx;
+  right: 40rpx;
+  font-size: 30rpx;
+color: #FFB202;
+}

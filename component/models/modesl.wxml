@@ -1,0 +1,11 @@
+<template name="component-model">
+<view class="c-model-wrapper {{visible?'':'c-model-hide'}}">
+  <image src="../../images/popbox_closed@3x.png" class="c-model-close" bindtap="closeModel"></image>
+  <view class="c-model-container">
+    <view class="c-model-title">{{title}}</view>
+    <view class="c-model-subtitle">{{subTitle}}</view>
+    <slot></slot>
+    <button class="c-model-button" bindtap="showModel">{{confirmText}}</button>
+  </view>
+</view>
+</template>

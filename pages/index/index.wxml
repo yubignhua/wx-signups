@@ -1,0 +1,59 @@
+<view class="index-container">
+  <view class="top">
+    <view class="title">
+      <view>2018年阿拉善英雄会</view>
+      <view>梦回阿拉善</view>
+      <view>今年我们再次踏上征程</view>
+      <view>报名活动已经全面展开！</view>
+    </view>
+    <view class="details">
+      <view>地点：阿拉善梦想公园</view>
+      <view >2018年10月1日—10月5日</view>
+    </view>
+  </view>
+  
+  <view class="bottom">
+    <view class="{{agree? 'bottom-hide':''}}">
+      <view class="select-title">选择入口</view>
+      <view class="select-button">
+        <picker bindchange="bindTeamChange" 
+                value="{{teamList[team].groupid}}" 
+                range="{{teamList}}"
+                range-key="{{'newName'}}">
+          <button class="team {{teamButton? 'button-slected': ''}}">
+            {{teamList[team].newName }}
+            <image wx:if="{{!teamButton}}" src="../../images/arrow_top_donw@3x.png"></image>
+            <image wx:else src="../../images/arrow_down-1.png"></image>
+          </button>
+        </picker>
+        <button class="person {{personButton? 'button-slected': ''}}" bindtap="clickPerson">散客</button>
+      </view>
+      <button class="sign-up {{signButton? 'button-slected': ''}}" bindtap="changeModel" data-visible="{{true}}">立即报名</button>
+    </view>
+    
+    <view class="{{!agree? 'bottom-hide':''}}">
+       <view class="select-title">{{ teamButton?teamList[team].newName : '散客' }}</view>
+       <view class="select-button">
+        <button class="continue-button" open-type="getPhoneNumber" bindgetphonenumber="toNextPage">继续报名</button>
+        <button class="count-button" bindtap="countSignUp">
+          报名统计
+        </button>
+       </view>
+    </view>
+    
+  </view>
+  <view class="model {{showModel?'':'hide-model'}}">
+      <image src="../../images/popbox_closed@3x.png" bindtap="changeModel" data-visible="{{false}}"></image>
+  </view>
+  <view class="model-wrapper {{showModel?'':'hide-model'}}">
+        <view class="model-title">报名须知</view>
+        <view class="model-contant">
+          <text>
+          1.本届英雄会依旧对任何人免费开放!\n 
+          2.需要进入营地的车辆必须至少购买一份保险 【价格￥120】 以获得“入营车贴”，以此车贴为车辆入营地的唯一凭证。\n
+          3.建议为随行人员也购买保险，尽情享受沙漠活动。
+          </text>
+        </view>
+        <button bindtap="continueSign">继续</button> 
+  </view> 
+</view>

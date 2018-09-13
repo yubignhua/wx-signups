@@ -1,0 +1,6 @@
+<template name="prompt">
+    <div class="prompt-wrap">
+        <image :src="https://dn-chunyu.qbox.me/@/media/images/2017/05/11/4f64/601f5c417b9b_w98_h96_.png" alt="无结果" class="prompt-image"></image>
+        <view class="prompt-text">无结果</view>
+    </div>
+</template>

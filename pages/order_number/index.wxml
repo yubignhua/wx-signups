@@ -1,0 +1,55 @@
+
+<view class="checkorder-container">
+  
+
+  <view  class="order-info-wrapper">
+  <!-- 订单头部 -->
+    <view class="order-info-top">
+      <view class="flex-layout order-id">
+        <view>订单号：{{orderList[0].orderid}}</view>
+        <view>报名板块：{{orderList[0].groupname}}</view>
+      </view>
+      <view class="order-code" wx:if="{{orderList[0].authoname}}">已授权给{{orderList[0].authoname}}代领</view>
+      <view class="order-code" wx:else>未授权</view>
+    </view>
+  <!-- 订单详情 -->
+    <view class="order-info-contant">
+      <view class="order-info-contant-title">订单详情</view>
+      <view>
+        <view class="item-insurance">
+          <view class="item-insurance-title">车辆-保险受益人</view>
+          <view class="order-price"><text style="color:#FFD446">￥{{orderList[0].racer_info.price}}</text>×{{orderList[0].racer_info.info.length}}</view>
+        </view>
+        <view class="item-insurance-info">
+          <view wx:for="{{orderList[0].racer_info.info.length && orderList[0].racer_info.info}}" wx:key="*this.id" class="item-person">{{ item.name }}  {{item.idcard}}</view>
+        </view>
+      </view>
+
+      <view class="info-wrapper">
+        <view class="item-insurance">
+          <view class="item-insurance-title">随行-保险受益人</view>
+          <view class="order-price"><text style="color:#FFD446">￥{{orderList[0].suixing_info.price}}</text>×{{orderList[0].suixing_info.info.length}}</view>
+        </view>
+        <view class="item-insurance-info">
+          <view wx:for="{{orderList[0].suixing_info.info.length && orderList[0].suixing_info.info}}" wx:key="*this.id" class="item-person">{{ item.name }}  {{item.idcard}}</view>
+        </view>
+      </view>
+
+      <view class="item-insurance info-wrapper">
+        <view class="item-insurance-title">车贴</view>
+        <view class="order-price"><text style="color:#FFD446">￥0</text>×{{orderList[0].goods.sticker.num}}</view>
+      </view>
+
+      <view class="item-insurance info-wrapper info-gift">
+        <view>
+          <view class="item-insurance-title">手礼</view>
+          <view class="order-price">
+            <text wx:for="{{orderList[0].goods.gift.length && orderList[0].goods.gift}}" wx:key="*this.id" class="order-gift-name">{{item.name}}  </text>
+          </view>
+        </view>
+        <view class="order-price"><text style="color:#FFD446">￥60</text>×{{orderList[0].goods.allNum}}</view>
+      </view>
+    </view>
+  </view>  
+  
+</view>

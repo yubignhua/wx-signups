@@ -1,0 +1,122 @@
+<view class="container">
+  <view>
+    <image class="doctor-img" src="../../images/step2.png" mode="scaleToFill"></image>
+  </view>
+
+  <view class="insurance-wrapper">
+    <view class="title-car">
+      <image class="title-mark" src="../../images/marks_rectangle@3x.png"></image>
+      <view class="title-car-contant">车辆-保险受益人</view>
+    </view>
+
+    <scroll-view class="car-scroll" scroll-x style="width: 100%">
+      <view class="car-wrapper" wx:for="{{carList}}" wx:key="*this.id">
+        <image src="../../images/marks_arrow@3x.png" class="{{index === carIndex?'':'hideNode'}}"></image>
+        <view bindtap="changeCar" data-imgindex="{{index}}">{{ item.name }}</view>
+      </view>
+    </scroll-view>
+    <view class="title-car">
+      <image class="title-mark" src="../../images/marks_rectangle@3x.png"></image>
+      <view class="title-car-contant">随行人员保险</view>
+    </view>
+    <view class="title-tip">沙漠活动有风险，建议为同行伙伴也购买保险</view>
+    <view class="add-person">
+      <image src="../../images/button_add.png" class='add_person_img' bindtap="showPersonModel"></image>
+      <view wx:if="{{carList[carIndex].personInsurance.length<=0}}" style='display:inline'>添加被保险人</view>
+      <view class="car-wrapper" wx:for="{{carList[carIndex].personInsurance}}" wx:key="*this.id">
+        <image src="../../images/button_delete@3x.png" class="delete" bindtap="deletPerson" data-index="{{index}}"></image>
+        <view bindtap="changeCar" data-imgindex="{{index}}">{{ item.name }}</view>
+      </view>
+    </view>
+
+
+    <!-- <component-model title="随行-保险受益人">
+
+    </component-model> -->
+  </view>
+
+  <view class="purchase_good_box">
+    <view class="good_wrapper">
+      <view class="good_img">
+
+      </view>
+      <view class="good_des">
+        <view class="good_title">购买手礼</view>
+        <view class="good_content">
+          <span style="color:#FFB202">¥60</span>/份，礼品名称、礼品名称和礼品名称</view>
+      </view>
+    </view>
+    <view class="good_calc">
+      <button style='border:none;' bindtap='delete' class='calc_delet calc_item' plain>－</button>
+      <view class='calc_num calc_item'>{{goodNum}}</view>
+      <button style='border:none;' bindtap='plug' class='calc_plug calc_item' plain>＋</button>
+
+    </view>
+
+
+
+
+  </view>
+
+  <view style='height:100px'></view>
+
+
+  <view class="btn-area">
+    <view style="color:#FFB202;padding-left:15px;background:white;">¥
+      <span style="font-size:60rpx">{{allCost}}</span>
+      <image class="arrow_img" src="{{visible2?'../../images/arrow_up2x.png':'../../images/arrow_donw2x.png'}}"></image>
+      <view bindtap='showOrder' style='color:#3D4045;display:inline-block;float:right;margin-right:20rpx;font-size:22rpx'>明细</view>
+
+    </view>
+    <button bindtap='submitAllData' class="next">立即支付</button>
+  </view>
+
+ <view class="model sheet {{visible2?'':'hide-model'}}" bindtap='showOrder'></view>
+  <view class="model-wrappers {{visible2?'':'hide-model'}}">
+      <view class="model-contants">
+        <view style='padding:30rpx'>
+        <view class='good-item'> <span>XXX保险</span> <span>....................</span> <span><span style="color:#FFB202">¥120</span>  ×  {{carList.length+accompanyingPerson}}份</span></view>
+        <view class='good-item'> <span>车贴</span> <span>....................</span> <span><span style="color:#FFB202">¥0</span>  ×  {{carList.length}}份</span></view>
+        <view class='good-item'> <span>手礼</span> <span>....................</span> <span><span style="color:#FFB202" >¥60</span>  ×  {{goodNum}}份</span></view>
+        </view>
+
+
+      </view>
+
+
+  </view>
+
+
+
+
+  <view class="model {{visible?'':'hide-model'}}">
+    <image src="../../images/popbox_closed@3x.png" bindtap="changeModel" data-visible="{{false}}"></image>
+  </view>
+  <view wx:if="{{visible}}" class="model-wrapper {{visible?'':'hide-model'}}">
+    <view class="model-title">随行-保险收益人</view>
+    <view class="warm-tip">
+      <view style='display:inline;color:#FFB202;margin-left:40rpx'>¥120</view>/份 买一份保险多一份安心</view>
+    <form bindsubmit="formSubmit">
+      <view class="model-contant">
+        <view class="section">
+          <input placeholder-class="phcolor" id="" class='item-input' name="name" placeholder="姓名" />
+        </view>
+        <view class="section">
+          <input placeholder-class="phcolor" id="" class='item-input' name="idcard" type="idcard" placeholder="身份证" />
+        </view>
+
+      </view>
+
+      <button formType="submit" bindtap="continueSign">确定</button>
+    </form>
+  </view>
+
+
+
+
+
+
+
+
+
+</view>

@@ -1,0 +1,18 @@
+.prompt-wrap {
+    text-align: center;
+    font-size: 30rpx;
+    color: #666;
+    position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.prompt-image {
+    width: 100rpx;
+    height: 100rpx;
+    margin-bottom: 20rpx;
+}
+.prompt-text {
+    line-height: 1.2;
+}

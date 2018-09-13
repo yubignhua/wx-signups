@@ -1,0 +1,150 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.index-container{
+  font-family: PingFangSC-Semibold;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.top{
+  position: absolute;
+  top: 38rpx;
+  left: 40rpx;
+}
+.title{
+  font-size: 46rpx;
+  color: #000;
+  font-weight: 600;
+}
+.details{
+  padding-top: 24rpx;
+  font-size: 26rpx;
+}
+
+
+
+.bottom{
+  position: absolute;
+  bottom: 50rpx;
+  left: 40rpx;
+  right: 40rpx;
+}
+.bottom-hide{
+  display: none;
+}
+.select-title{
+  font-size: 34rpx;
+}
+.select-button{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+}
+.team{
+  width: 390rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  background: #ededed;
+  color: #8B9096;
+  font-size: 24rpx;
+  border-radius: 20rpx;
+   border: none;
+}
+.index-container picker image{
+  width: 22rpx;
+  height: 14rpx;
+}
+.person{
+  width: 240rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  background: #ededed;
+  color: #8B9096;
+  font-size: 24rpx;
+  border-radius: 20rpx;
+}
+.sign-up{
+  border-radius: 20rpx;
+  opacity: 0.4;
+  background: #FFD446;
+  border: 5rpx solid #FFD446;
+  margin-top: 32rpx;
+}
+.button-slected{
+  background: #FFD446;
+  color: #000;
+  opacity: 1;
+}
+.continue-button{
+  width: 500rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 30rpx;
+  background: #FFD446;
+  border-radius: 20rpx;
+}
+.count-button{
+   width: 160rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  background: #303338;
+  border-radius: 20px;
+  font-size: 22rpx;
+  color: #E6E6E6;
+}
+
+.model{
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #000;
+  opacity: 0.8;
+  z-index: 10;
+}
+
+
+.model-wrapper{
+  display: block;
+  position: absolute;
+  top: 217rpx;
+  left: 40rpx;
+  width: 670rpx;
+  background: #FFFFFF;
+  border-radius: 20px;
+  z-index: 20;
+}
+.model image{
+  position: absolute;
+  top: 145rpx;
+  right: 40rpx;
+  width: 60rpx;
+  height: 60rpx;
+  z-index: 20;
+}
+.model-title{
+  padding: 52rpx 0 44rpx 40rpx;
+  font-size: 36rpx;
+  color: #BEBEBE;
+}
+.model-contant{
+  padding: 0 40rpx;
+  font-size: 32rpx;
+  color: #000000;
+}
+.model-wrapper button{
+  width: 240rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  background: #FFD446;
+  margin: 71rpx auto 55rpx auto;
+  font-size: 24rpx;
+}
+.hide-model{
+  display: none;
+}

@@ -1,0 +1,50 @@
+{
+    "pages": [
+                
+          "pages/index/index",
+           "pages/adding_accompany/index",
+                          
+          "pages/complate_sign/index",
+          "pages/adding_vehicles/index",
+          
+          "pages/order_number/index",
+          "pages/order/index",
+          "pages/empower/index",
+          "pages/component/model/model"
+              
+                
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#000000",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#F8F8F8"
+    },
+      "tabBar": {
+        "color": "#8B9096",
+        "selectedColor": "#FFD446",
+        "borderStyle": "white",
+        "backgroundColor": "#000000",
+        "list": [
+            {
+              "pagePath": "pages/index/index",
+              "text": "报名",
+              "iconPath": "images/index-icon.png",
+              "selectedIconPath": "images/index-icon.png"
+            },
+            {
+              "pagePath": "pages/order/index",
+              "text": "订单",
+              "iconPath": "images/person-center.png",
+              "selectedIconPath": "images/person-center.png"
+            }
+        ]
+      },
+    "networkTimeout": {
+        "request": 10000,
+        "downloadFile": 10000
+    } 
+}
+
+

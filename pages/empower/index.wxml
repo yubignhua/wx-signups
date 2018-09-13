@@ -1,0 +1,39 @@
+
+<view class="container">
+  <view class="empower-title">*请选择代领人，授权后不可撤回</view>
+  <view class="empower-cantant">
+    <view>
+      <view class="empower-team">{{teamName}}</view>
+      <view class="empower-explain">名额100 截止时间9月25日</view>
+    </view>
+    <button bindtap="empower" data-type="{{0}}">授权</button>
+  </view>
+  <view class="empower-cantant">
+    <view>
+      <view class="empower-team">个人</view>
+      <view class="empower-explain">需对方已成功报名</view>
+    </view>
+    <button bindtap="empower" data-type="{{1}}">授权</button>
+  </view>
+
+  <view class="model {{visible?'':'hide-model'}}">
+    <image src="../../images/popbox_closed@3x.png" bindtap="changeModel"></image>
+  </view>
+  <view class="model-wrapper {{visible?'':'hide-model'}}">
+    <view class="model-title">授权给个人</view>
+    <view class="warm-tip">需对方已成功报名</view>
+    <form bindsubmit="formSubmit">
+      <view class="model-contant">
+        <view class="section">
+          <input placeholder-class="phcolor" bindinput="getPhone" class='item-input' name="phone" placeholder="手机号" />
+        </view>
+        <view class="section">
+          <input placeholder-class="phcolor" class='item-input' name="identify-code" placeholder="验证码" />
+        </view>
+        <view class="get-identify" bindtap="getIdentifyCode" data-params="{{phone}}">获取验证码</view>
+      </view>
+
+      <button formType="submit" bindtap="continueSign">确定</button>
+    </form>
+  </view>
+</view>

@@ -1,0 +1,54 @@
+.c-model-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+}
+
+.c-model-container{
+  background: #fff;
+  border-radius: 20rpx;
+  margin: 250rpx 40rpx 0 40rpx;
+  padding: 40rpx;
+}
+
+.c-model-title{
+  font-size: 36rpx;
+  color: #BEBEBE;
+}
+
+.c-model-subtitle{
+  font-size: 22rpx;
+  color: #BEBEBE;
+}
+
+.c-model-close{
+  float: right;
+  top: 190rpx;
+  right: 40rpx;
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.c-model-hide{
+  display: none;
+}
+
+.c-model-button{
+  width: 240rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  margin: auto;
+  text-align: center;
+  background: #FFD446;
+  border-radius: 20px;
+}
+.c-comopmer{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  
+}
