@@ -255,9 +255,10 @@ Page({
     if (carList.length <= 0) return;
     let arr = [];
     for (var i = 0; i < carList.length; i++) {
-      // arr = [carList[i].personInsurance,...arr]
-      arr = arr.concat(carList[i].personInsurance)
+      arr =  [...carList[i].personInsurance,...arr]
+      //arr = arr.concat(carList[i].personInsurance)
     }
+    console.log(arr)
     getApp().globalData.signUpData.detail.suixing_info = arr;
     this.setData({
       accompanyingPerson:arr.length
