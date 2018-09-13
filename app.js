@@ -53,13 +53,6 @@ App({
         } else {
           that.weixinLogin()//登录可重新获取 session_key
 
-          // wx.authorize({
-          //   scope: 'scope.userInfo',
-          //   success() {
-          //     // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-          //     wx.startRecord()
-          //   }
-          // })
         }
       },
       fail: function () {//已过期
@@ -75,7 +68,6 @@ App({
     var data = null
     wx.login({ //调用接口wx.login() 获取临时登录凭证（code）
       success: function (res) {
-        getApp().globalData.code = res.code;
         if (res.code) {
           //发起网络请求
           wx.pro.request({
@@ -85,8 +77,8 @@ App({
               code: res.code
             }
           }).then((res) => {
-            getApp().globalData.signUpData.entry_info.openid = res.data.data.openid;
-            getApp().globalData.sessionkey = res.data.data.sessionkey;
+            that.globalData.signUpData.entry_info.openid = res.data.data.openid;
+            that.globalData.orderid = res.data.data.orderid;
           })
         } else {
           wx.showToast({
@@ -130,7 +122,7 @@ App({
    */
   getUserKey(data) {
     wx.request({
-      url: "https://alxa.fblife.com/wx/getopenid/",
+      url: loginUr,
       method: 'POST',
       data: data,
       success: function (data) {
@@ -194,6 +186,6 @@ App({
   },
   onLaunch() {
     var that = this
-   that.login()
+    that.weixinLogin()
   }
 })
