@@ -1,30 +1,30 @@
 <view class="container">
   <view>
-    <image class="doctor-img" src="../../images/step2.png" mode="scaleToFill"></image>
+    <image class="doctor-img" src="../../images/s_accompany_step2.png" mode="scaleToFill"></image>
   </view>
 
   <view class="insurance-wrapper">
     <view class="title-car">
-      <image class="title-mark" src="../../images/marks_rectangle@3x.png"></image>
+      <image class="title-mark" src="../../images/s_vehicles_2.png"></image>
       <view class="title-car-contant">车辆-保险受益人</view>
     </view>
 
     <scroll-view class="car-scroll" scroll-x style="width: 100%">
       <view class="car-wrapper" wx:for="{{carList}}" wx:key="*this.id">
-        <image src="../../images/marks_arrow@3x.png" class="{{index === carIndex?'':'hideNode'}}"></image>
+        <image src="../../images/s_vehicles_2.png" class="{{index === carIndex?'':'hideNode'}}"></image>
         <view bindtap="changeCar" data-imgindex="{{index}}">{{ item.name }}</view>
       </view>
     </scroll-view>
     <view class="title-car">
-      <image class="title-mark" src="../../images/marks_rectangle@3x.png"></image>
+      <image class="title-mark" src="../../images/s_vehicles_1.png"></image>
       <view class="title-car-contant">随行人员保险</view>
     </view>
     <view class="title-tip">沙漠活动有风险，建议为同行伙伴也购买保险</view>
     <view class="add-person">
-      <image src="../../images/button_add.png" class='add_person_img' bindtap="showPersonModel"></image>
+      <image src="../../images/s_vehicles_3.png" class='add_person_img' bindtap="showPersonModel"></image>
       <view wx:if="{{carList[carIndex].personInsurance.length<=0}}" style='display:inline'>添加被保险人</view>
       <view class="car-wrapper" wx:for="{{carList[carIndex].personInsurance}}" wx:key="*this.id">
-        <image src="../../images/button_delete@3x.png" class="delete" bindtap="deletPerson" data-index="{{index}}"></image>
+        <image src="../../images/s_accompany_1.png" class="delete" bindtap="deletPerson" data-index="{{index}}"></image>
         <view bindtap="changeCar" data-imgindex="{{index}}">{{ item.name }}</view>
       </view>
     </view>
@@ -64,7 +64,7 @@
   <view class="btn-area">
     <view style="color:#FFB202;padding-left:15px;background:white;">¥
       <span style="font-size:60rpx">{{allCost}}</span>
-      <image class="arrow_img" src="{{visible2?'../../images/arrow_up2x.png':'../../images/arrow_donw2x.png'}}"></image>
+      <image class="arrow_img" src="{{visible2?'../../images/s_arrow_up.png':'../../images/s_arrow_donw.png'}}"></image>
       <view bindtap='showOrder' style='color:#3D4045;display:inline-block;float:right;margin-right:20rpx;font-size:22rpx'>明细</view>
 
     </view>

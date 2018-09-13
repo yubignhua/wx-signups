@@ -1,6 +1,6 @@
 <view class="container">
   <view class="top">
-    <image class="doctor-img" src="../../images/step1.png" mode="scaleToFill"></image>
+    <image class="doctor-img" src="../../images/s_vehicles_step1.png" mode="scaleToFill"></image>
   </view>
   <view class="warm-tip">
     <view style='display:inline;color:#FFB202;margin-left:40rpx'>¥120</view>/份 包含保险,可获得一份车贴,凭此进营地</view>
@@ -16,7 +16,7 @@
             <view class="form-des">
               <view class="left-block" />车辆{{index+1}}-保险收益人</view>
             <view wx:if="{{index == 0}}">
-              <image class="right-left-img" src="../../images/right-top.png"></image>
+              <image class="right-left-img" src="../../images/s_vehicles_2.png"></image>
             </view>
 
             <view class="swiper-item {{item}}">
@@ -39,7 +39,7 @@
             <view class='add_car_wrapper'>
               <view class='add_car'>
                 <button bindtap='addCar' formType="submit">
-                  <image src='../../images/button_add.png' class='carimg'></image>
+                  <image src='../../images/s_vehicles_3.png' class='carimg'></image>
                 </button>
               </view>
               <view>添加车辆</view>
