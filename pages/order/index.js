@@ -26,16 +26,7 @@ Page({
         },
         suixing_info: {
           price: 120,
-          info: [{
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }, {
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }, {
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }]
+          info: []
         },
         goods:{
           allNum: 4,
@@ -79,16 +70,16 @@ Page({
         data: {orderid: params},
         method: 'POST'
       }).then(( res )=>{
-        let gift = res.data[0].goods.gift;
+        let gift = res.data && res.data[0].goods.gift;
         let giftNum = 0;
-        if (gift.length) {
+        if (gift && gift.length) {
           gift.map((item, index) => {
             giftNum += item.num
           })
         }
         res.data[0].goods.allNum = giftNum;
         this.setData({
-          orderList: res.data.data
+          orderList: res.data
         })
       })
     },

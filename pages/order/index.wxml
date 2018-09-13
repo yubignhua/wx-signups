@@ -44,7 +44,7 @@
           <view class="order-price"><text style="color:#FFD446">￥{{orderList[0].racer_info.price}}</text>×{{orderList[0].racer_info.info.length}}</view>
         </view>
         <view class="item-insurance-info">
-          <view wx:for="{{orderList[0].racer_info.info.length && orderList[0].racer_info.info}}" wx:key="*this.id" class="item-person">{{ item.name }}  {{item.idcard}}</view>
+          <view wx:for="{{orderList[0].racer_info.info}}" wx:key="*this.id" class="item-person">{{ item.name }}  {{item.idcard}}</view>
         </view>
       </view>
 
@@ -54,7 +54,7 @@
           <view class="order-price"><text style="color:#FFD446">￥{{orderList[0].suixing_info.price}}</text>×{{orderList[0].suixing_info.info.length}}</view>
         </view>
         <view class="item-insurance-info">
-          <view wx:for="{{orderList[0].suixing_info.info.length && orderList[0].suixing_info.info}}" wx:key="*this.id" class="item-person">{{ item.name }}  {{item.idcard}}</view>
+          <view wx:for="{{ orderList[0].suixing_info.info}}" wx:key="*this.id" class="item-person">{{ item.name }}  {{item.idcard}}</view>
         </view>
       </view>
 
@@ -67,7 +67,7 @@
         <view>
           <view class="item-insurance-title">手礼</view>
           <view class="order-price">
-            <text wx:for="{{orderList[0].goods.gift.length && orderList[0].goods.gift}}" wx:key="*this.id" class="order-gift-name">{{item.name}}  </text>
+            <text wx:for="{{orderList[0].goods.gift}}" wx:key="*this.id" class="order-gift-name">{{item.name}}  </text>
           </view>
         </view>
         <view class="order-price"><text style="color:#FFD446">￥60</text>×{{orderList[0].goods.allNum}}</view>
