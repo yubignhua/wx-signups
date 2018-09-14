@@ -14,7 +14,6 @@
             <view wx:if="{{index !=CarsList.length-1}}">
               <view class='delete' bindtap='deleteCar' data-index="{{index}}">删除</view>
             </view>
-
             <view class="form-des">
               <view class="left-block" />车辆{{index+1}}-保险收益人</view>
             <view wx:if="{{index == 0}}">
@@ -46,14 +45,8 @@
               </view>
               <view>添加车辆</view>
             </view>
-
           </view>
-
-
-
-
         </form>
-
       </swiper-item>
     </block>
   </swiper>

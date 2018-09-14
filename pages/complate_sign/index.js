@@ -186,10 +186,8 @@ Page({
     return {
 
       title: '阿拉善英雄会',
-
       desc: '阿拉善英雄会2018官方报名',
-
-      path: '/pages/complate_sign'
+      path: 'pages/index/index'
 
     }
   },
