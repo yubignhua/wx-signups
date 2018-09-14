@@ -5,46 +5,7 @@ let orderUrl = base_url.baseUrl + '/order/getDetail'
 
 Page({
     data: {
-      orderList: {
-        orderid: 12345,
-        qrurl:'',
-        groupname: '北京大队',
-        teamId: 2,
-        authoname: '',
-        racer_info: {
-          price: 120,
-          info:[{
-            name: '金晓然',
-            idcard: '142223199305062345'
-          }, {
-              name: '金晓然',
-              idcard: '142223199305062345'
-          }, {
-              name: '金晓然',
-              idcard: '142223199305062345'
-          }]
-        },
-        suixing_info: {
-          price: 120,
-          info: []
-        },
-        goods:{
-          allNum: 4,
-          gift: [{
-            num: 2,
-            name: '赛程必备'
-          }, {
-              num: 2,
-              name: '赛程必备'
-            }],
-          sticker: {
-            num: 4,
-            name: '赛程必备'
-          }
-        },
-        total: 900,
-        signPeople: 30
-      },
+      orderList: {},
       checkState: false,
       modelState: false,
       scrollState: true,
@@ -54,21 +15,24 @@ Page({
     
     onLoad: function (options) {
       let openId = app.globalData.signUpData.entry_info.openid;
-      console.log(openId,'=========')
+      let orderId = app.globalData.orderid;
+      console.log(openId, orderId,'=========')
       if (openId ){
-        this.getOrder(openId)
+        this.getOrder()
       }
     },
 
     /**
      * 获取订单数据
      */
-    getOrder (params) {
-      console.log('1111111')
+    getOrder () {
       wx.pro.request({
         url: orderUrl,
-        data: { openid: params, orderid: '' },
-        contentType:'text/html;charset=utf-8',
+        data: { 
+          openid: app.globalData.signUpData.entry_info.openid,
+          orderid: app.globalData.orderid ? app.globalData.orderid:''
+        },
+        contentType: 'application/json;charset=utf-8',
         method: 'POST'
       }).then(( res )=>{
         console.log(res)

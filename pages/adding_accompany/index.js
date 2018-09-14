@@ -292,6 +292,7 @@ Page({
       let mData = res.data;
       //调起原生支付
       if (mData.code === "1000"){
+        app.globalData.orderid = mData.data.orderid
         wx.requestPayment(
           {
             'appId': mData.data.appId,
@@ -301,18 +302,14 @@ Page({
             'signType': mData.data.signType,
             'paySign': mData.data.paySign,
             'success': function (res) {
-              console.log("支付成功", res)
+              
               wx.redirectTo({
                 url: '../complate_sign/index',
               })
-              app.globalData.orderid = mData.orderid
+              
              },
             'fail': function (res) { 
               console.log("支付失败", res)
-              wx.redirectTo({
-                url: '../complate_sign/index',
-              })
-              app.globalData.orderid = mData.data.orderid
             },
           })
         

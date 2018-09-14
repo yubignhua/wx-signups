@@ -19,7 +19,10 @@ Page({
   getOrder(params) {
     wx.pro.request({
       url: orderUrl,
-      data: { orderid: params },
+      data: { 
+        openid: app.globalData.signUpData.entry_info.openid,
+        orderid: params 
+      },
       method: 'POST'
     }).then((res) => {
       let gift = res.data.data && res.data.data.goods.gift;
