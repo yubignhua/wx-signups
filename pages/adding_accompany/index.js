@@ -112,7 +112,7 @@ Page({
       if (res.data.code == 1000) {
         callback(res);
       } else {
-        error();
+        error(res);
       }
     })
   },
@@ -180,12 +180,18 @@ Page({
       });
       this.calAllCost();
       this.getAccompanyingPerson();
-      console.log('this.data.carList', this.data.carList)
     },res =>{
-      wx.showToast({
-        title: "实名验证失败"
-      })
-
+      if (res.data.code == 1008) {
+        wx.showToast({
+          title: "不能重复报名",
+          icon: "none"
+        })
+      }else{
+        wx.showToast({
+          title: "实名验证失败",
+          icon: "none"
+        })
+      }
     })
 
 
@@ -211,7 +217,6 @@ Page({
     })
     this.calAllCost();
     this.getAccompanyingPerson;
-    console.log('this.data.carList', this.data.carList)
 
   },
 
@@ -256,16 +261,13 @@ Page({
       arr =  [...carList[i].personInsurance,...arr]
       //arr = arr.concat(carList[i].personInsurance)
     }
-    console.log(arr)
     getApp().globalData.signUpData.detail.suixing_info = arr;
     this.setData({
       accompanyingPerson:arr.length
     })
   },
 
-  /**
-   * 获取物品信息并存储
-   */
+  
 
   /**
    * 立即支付(提交订单)
@@ -280,15 +282,12 @@ Page({
       app.globalData.signUpData.detail.goods.insur[i].num = pSize;
     }
 
-
-    console.log("app.globalData.signUpData:::", app.globalData.signUpData)
     wx.pro.request({
       url: orderUrl,
       method: "POST",
       // contentType:'text/html;charset=utf-8',
       data: app.globalData.signUpData,
     }).then((res) => {
-      console.log("res::::",res);
       let mData = res.data;
       //调起原生支付
       if (mData.code === "1000"){
@@ -309,24 +308,27 @@ Page({
               
              },
             'fail': function (res) { 
-              console.log("支付失败", res)
+
             },
           })
-        
-
-        
-
-
       }else{
+        if(res.data.code === "1105"){
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
         wx.showToast({
-          title: res.msg || "提交订单失败"
+          title: res.msg || "提交订单失败",
+          icon: "none"
         })
 
       }
 
     }).catch(res => {
       wx.showToast({
-        title: "网络错误"
+        title: "网络错误",
+        icon: "none"
       })
     })
   },

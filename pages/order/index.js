@@ -16,7 +16,6 @@ Page({
     onLoad: function (options) {
       let openId = app.globalData.signUpData.entry_info.openid;
       let orderId = app.globalData.orderid;
-      console.log(openId, orderId,'=========')
       if (openId ){
         this.getOrder()
       }
@@ -36,7 +35,7 @@ Page({
         method: 'POST'
       }).then(( res )=>{
         console.log(res)
-        if(res.data.code === 1000){
+        if(res.data.code === "1000"){
           let gift = res.data.data && res.data.data.goods.gift;
           let giftNum = 0;
           if (gift && gift.length) {
@@ -86,7 +85,6 @@ Page({
    * 表单提交
    */
   formSubmit(e) {
-    console.log(e)
     this.data.mData = e.detail.value;
   },
 
@@ -102,7 +100,9 @@ Page({
       })
       return;
     }
+    
     this.toNextPage( this.data.mData[`number`] )
+    
   },
 
   toNextPage( params ) {

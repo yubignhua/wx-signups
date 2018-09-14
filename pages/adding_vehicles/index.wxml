@@ -4,6 +4,8 @@
   </view>
   <view class="warm-tip">
     <view style='display:inline;color:#FFB202;margin-left:40rpx'>¥120</view>/份 包含保险,可获得一份车贴,凭此进营地</view>
+  <view class="warm-tip" style='display:inline;color:#FFB202;margin-left:40rpx'>注：车辆1的手机号为该订单联系人手机号</view>
+    
   <swiper class="m-swiper" indicator-dots="{{indicatorDots}}" vertical="{{false}}" previous-margin="20px" next-margin="20px" current="{{current}}" bindchange="change">
     <block wx:for="{{CarsList}}" wx:key="*this.iden">
       <swiper-item>

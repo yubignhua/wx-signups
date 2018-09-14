@@ -147,9 +147,18 @@ Page({
       })
       console.log(res,'resres')
     },res=>{
-      wx.showToast({
-        title: "实名认证失败"
-      })
+      if(res.data.code == 1008){
+        wx.showToast({
+          title: "不能重复报名",
+          icon: "none"
+        })
+      }else{
+        wx.showToast({
+          title: "实名认证失败",
+          icon: "none"
+        })
+      }
+      
     })
 
     
@@ -171,7 +180,7 @@ Page({
       if(res.data.code == 1000){
         callback(res);
       }else{
-        error();
+        error(res);
       }
     })
   },
@@ -211,18 +220,23 @@ Page({
       wx.redirectTo({
         url: '../adding_accompany/index'
       })
-      // wx.navigateTo({
-      //   url: "../adding_accompany/index"
-      // })
+      
     },res=>{
       //验证失败
       this.setData({
         nextFlag: true
       })
-      wx.showToast({
-        title: "实名认证失败"
-      })
-
+      if(res.data.code == 1008){
+        wx.showToast({
+          title: "不能重复报名",
+          icon: 'none'
+        })
+      }else{
+        wx.showToast({
+          title: "实名认证失败",
+          icon: 'none'
+        })
+      }
     })
 
 

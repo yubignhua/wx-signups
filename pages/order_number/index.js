@@ -25,17 +25,22 @@ Page({
       },
       method: 'POST'
     }).then((res) => {
-      let gift = res.data.data && res.data.data.goods.gift;
-      let giftNum = 0;
-      if (gift && gift.length) {
-        gift.map((item, index) => {
-          giftNum += item.num
+      if(res.data.code === "1000"){
+        let gift = res.data.data && res.data.data.goods.gift;
+        let giftNum = 0;
+        if (gift && gift.length) {
+          gift.map((item, index) => {
+            giftNum = Number(giftNum) + Number(item.num)
+          })
+        }
+        res.data.data.goods.allNum = giftNum;
+        this.setData({
+          orderList: res.data.data
+        },()=>{
+          console.log(this.data.orderList.goods.allNum)
         })
       }
-      res.data.data.goods.allNum = giftNum;
-      this.setData({
-        orderList: res.data.data
-      })
+      
       if (!res.data.data.racer_info || !res.data.data.racer_info.info.length){
         wx.showModal({
           title: '提示',
