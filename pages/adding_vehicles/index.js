@@ -83,6 +83,8 @@ Page({
         content: '请填写正确的用户名',
         showCancel: false,
         confirmColor: "#000000"
+
+
       })
       nameState = false
     }else{
@@ -130,8 +132,11 @@ Page({
       return
     }
     this.checkPerson(this.data.mData,res=>{
+      //this.data.CarsList[this.data.current] = this.data.mData;
       this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData)
       this.data.dataList.push(this.data.mData);
+      // this.data.flagList.push(false)
+      // this.data.flagList[this.data.flagList.length - 2] = true;
       this.data.flagList.splice(this.data.flagList.length - 1, 0, true)
       this.setData({
         CarsList: this.data.CarsList,

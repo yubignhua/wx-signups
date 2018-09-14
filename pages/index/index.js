@@ -112,7 +112,12 @@ Page({
       this.setData({
         showModel: event.target.dataset.visible,
         signType: 1
-      }):null;
+      }) : wx.showModal({
+        content: '请选择加入的大队',
+        showCancel: false,
+        confirmText: '知道了',
+        confirmColor: '#000000'
+      })
   },
 
   continueSign(){
