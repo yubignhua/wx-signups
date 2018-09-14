@@ -82,10 +82,11 @@ Page({
       this.data.carList = res.data;
     })
   },
+  
   changeCar(e) {
     this.setData({
       carIndex: e.target.dataset.imgindex
-    })
+    });
     console.log("carIndex:::", this.data.carIndex)
   },
   showPersonModel() {
@@ -116,9 +117,7 @@ Page({
       }
     })
   },
-
-
-
+  
   /**
    * 表单验证
    */
@@ -145,8 +144,6 @@ Page({
         content: '请填写正确的身份证号码',
         showCancel: false,
         confirmColor: "#000000"
-
-
       })
       idState = false
     } else {
@@ -158,11 +155,6 @@ Page({
       idState: idState,
     })
   },
-
-
-
-
-
 
   /**
    * 增加随行人员保险
@@ -187,13 +179,8 @@ Page({
       })
 
     })
-
-
-
-
-    
-
   },
+
   /**
   * 表单提交
   */
@@ -249,15 +236,15 @@ Page({
    * 获取随行人员数据并存储
    */
   getAccompanyingPerson() {
-    var carList = this.data.carList;
+    //var carList = this.data.carList;
+    let {carList} = this.data;
     if (carList.length <= 0) return;
     let arr = [];
-    for (var i = 0; i < carList.length; i++) {
-      arr =  [...carList[i].personInsurance,...arr]
-      //arr = arr.concat(carList[i].personInsurance)
-    }
-    console.log(arr)
-    getApp().globalData.signUpData.detail.suixing_info = arr;
+    carList.map((item,index)=>{
+	    arr = [...carList[index].personInsurance,...arr]
+    });
+    console.log('carListArr=====',arr);
+    app.globalData.signUpData.detail.suixing_info = arr;
     this.setData({
       accompanyingPerson:arr.length
     })
@@ -271,16 +258,15 @@ Page({
    * 立即支付(提交订单)
    */
   submitAllData() {
+    let {goodNum,allCost} = this.data;
     this.getAccompanyingPerson();
-    app.globalData.signUpData.detail.goods.gift[0].num = this.data.goodNum;
-    app.globalData.signUpData.charge = this.data.allCost;
-    var insur = app.globalData.signUpData.detail.goods.insur;
-    let pSize = app.globalData.signUpData.detail.suixing_info.length;
-    for (var i = 0; i < insur.length;i++){
-      app.globalData.signUpData.detail.goods.insur[i].num = pSize;
-    }
-
-
+    app.globalData.signUpData.detail.goods.gift[0].num = goodNum;
+    app.globalData.signUpData.charge = allCost;
+	  let{goods,suixing_info} = app.globalData.signUpData.detail;
+    let pSize = suixing_info.length;
+	  goods.insur.map((item,index)=>{
+	    app.globalData.signUpData.detail.goods.insur[index].num = pSize;
+    });
     console.log("app.globalData.signUpData:::", app.globalData.signUpData)
     wx.pro.request({
       url: orderUrl,
@@ -292,40 +278,33 @@ Page({
       let mData = res.data;
       //调起原生支付
       if (mData.code === "1000"){
-        wx.requestPayment(
-          {
-            'timeStamp': mData.data.timeStamp,
-            'nonceStr': mData.data.nonceStr,
-            'package': mData.data.package,
-            'signType': mData.data.signType,
-            'paySign': mData.data.package,
-            'success': function (res) {
-              console.log("支付成功", res)
-              wx.redirectTo({
-                url: '../complate_sign/index',
-              })
-              app.globalData.orderid = mData.orderid
-             },
-            'fail': function (res) { 
-              console.log("支付失败", res)
-              wx.redirectTo({
-                url: '../complate_sign/index',
-              })
-              app.globalData.orderid = mData.data.orderid
-            },
-          })
-        
-
-        
-
-
+	      console.log('mData.data',mData.data)
+	
+	      console.log('mData.data.timeStamp',mData.data.timeStamp)
+	      wx.requestPayment({
+		      'timeStamp' : mData.data.timeStamp,
+		      'nonceStr' : mData.data.nonceStr,
+		      'package' : mData.data.package,
+		      'signType' : mData.data.signType,
+		      'paySign' : mData.data.paySign,
+		      'success' : function(res){
+			      app.globalData.orderid = mData.orderid;
+			      wx.redirectTo({
+				      url : '../complate_sign/index',
+			      });
+		      },
+		      'fail' : function(res){
+			      console.log("支付失败",res);
+			      wx.showToast({
+				      title: res.err_desc || "提交订单失败"
+			      })
+		      },
+	      })
       }else{
         wx.showToast({
           title: res.msg || "提交订单失败"
         })
-
       }
-
     }).catch(res => {
       wx.showToast({
         title: "网络错误"
@@ -336,9 +315,7 @@ Page({
 
 
   },
-
-
-
+  
   toNextPage: function () {
     wx.navigateTo({
       url: "../adding_vehicles/index"
