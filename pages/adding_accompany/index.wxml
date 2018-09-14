@@ -4,9 +4,9 @@
   </view>
 
   <view class="insurance-wrapper">
-    <view class="title-car">
-      <image class="title-mark" src="../../images/s_vehicles_2.png"></image>
-      <view class="title-car-contant">车辆-保险受益人</view>
+    <view class="car-contant">
+      <view class="title-car">
+      <view class="title-car-contant">车辆（{{carList.length}}）</view>
     </view>
 
     <scroll-view class="car-scroll" scroll-x style="width: 100%">
@@ -15,19 +15,28 @@
         <view bindtap="changeCar" data-imgindex="{{index}}">{{ item.name }}</view>
       </view>
     </scroll-view>
-    <view class="title-car">
-      <image class="title-mark" src="../../images/s_vehicles_1.png"></image>
-      <view class="title-car-contant">随行人员保险</view>
     </view>
-    <view class="title-tip">沙漠活动有风险，建议为同行伙伴也购买保险</view>
-    <view class="add-person">
-      <image src="../../images/s_vehicles_3.png" class='add_person_img' bindtap="showPersonModel"></image>
-      <view wx:if="{{carList[carIndex].personInsurance.length<=0}}" style='display:inline'>添加被保险人</view>
-      <view class="car-wrapper" wx:for="{{carList[carIndex].personInsurance}}" wx:key="*this.id">
+    
+    <view class="person-content">
+      <view class="title-car">
+      <image class="title-mark" src="../../images/s_vehicles_1.png"></image>
+      <view class="title-person-contant">随行人员保险</view>
+    </view>
+    <scroll-view class="car-scroll" scroll-x style="border: 0;width: 100%">
+    <view class="title-tip">*  沙漠活动有风险，建议为同行伙伴也购买保险</view>
+    <view class="person-contant">
+      <view class="person-wrapper" wx:for="{{carList[carIndex].personInsurance}}" wx:key="*this.id">
         <image src="../../images/s_accompany_1.png" class="delete" bindtap="deletPerson" data-index="{{index}}"></image>
         <view bindtap="changeCar" data-imgindex="{{index}}">{{ item.name }}</view>
       </view>
     </view>
+    </scroll-view>
+    <view class="add-person">
+      <image src="../../images/s_vehicles_3.png" class='add_person_img' bindtap="showPersonModel"></image>
+      <view style='display:inline;color: #FFD446'>添加被保险人</view>
+    </view>
+    </view>
+    
 
 
     <!-- <component-model title="随行-保险受益人">
@@ -36,29 +45,23 @@
   </view>
 
   <view class="purchase_good_box">
-    <view class="good_wrapper">
-      <view class="good_img">
-
-      </view>
+    <view class="">
       <view class="good_des">
         <view class="good_title">购买手礼</view>
         <view class="good_content">
-          <span style="color:#FFB202">¥60</span>/份，礼品名称、礼品名称和礼品名称</view>
+          <span style="color:#FFB202">¥60</span>/份</view>
+        </view>
       </view>
-    </view>
     <view class="good_calc">
-      <button style='border:none;' bindtap='delete' class='calc_delet calc_item' plain>－</button>
+      <button style="border: none" bindtap='delete' class='calc_delet calc_item' plain>－</button>
       <view class='calc_num calc_item'>{{goodNum}}</view>
-      <button style='border:none;' bindtap='plug' class='calc_plug calc_item' plain>＋</button>
-
+      <button style="border: none" bindtap='plug' class='calc_plug calc_item' plain>＋</button>
     </view>
 
 
 
 
   </view>
-
-  <view style='height:100px'></view>
 
 
   <view class="btn-area">
