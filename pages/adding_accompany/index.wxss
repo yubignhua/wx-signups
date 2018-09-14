@@ -104,6 +104,9 @@ page {
   font-size: 24rpx;
   color: #000; 
 }
+.person-wrapper + .person-wrapper{
+  margin-left: 20rpx;
+}
 .person-wrapper image{
   right: 0;
   width: 30rpx;
