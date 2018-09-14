@@ -294,11 +294,12 @@ Page({
       if (mData.code === "1000"){
         wx.requestPayment(
           {
+            'appId': mData.data.appId,
             'timeStamp': mData.data.timeStamp,
             'nonceStr': mData.data.nonceStr,
             'package': mData.data.package,
             'signType': mData.data.signType,
-            'paySign': mData.data.package,
+            'paySign': mData.data.paySign,
             'success': function (res) {
               console.log("支付成功", res)
               wx.redirectTo({
@@ -330,11 +331,7 @@ Page({
       wx.showToast({
         title: "网络错误"
       })
-
     })
-    //console.log('++++++',app.globalData.signUpData)
-
-
   },
 
 

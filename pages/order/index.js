@@ -53,34 +53,38 @@ Page({
     },
     
     onLoad: function (options) {
-      let orderId = app.globalData.orderid
-      if (orderId ){
-        //setTimeout(() => { this.getOrder(orderId)});
+      let openId = app.globalData.signUpData.entry_info.openid;
+      console.log(openId,'=========')
+      if (openId ){
+        this.getOrder(openId)
       }
-      
-    
     },
 
     /**
      * 获取订单数据
      */
     getOrder (params) {
+      console.log('1111111')
       wx.pro.request({
         url: orderUrl,
-        data: {orderid: params},
+        data: { openid: params, orderid: '' },
+        contentType:'text/html;charset=utf-8',
         method: 'POST'
       }).then(( res )=>{
-        let gift = res.data.data && res.data.data.goods.gift;
-        let giftNum = 0;
-        if (gift && gift.length) {
-          gift.map((item, index) => {
-            giftNum += item.num
+        console.log(res)
+        if(res.data.code === 1000){
+          let gift = res.data.data && res.data.data.goods.gift;
+          let giftNum = 0;
+          if (gift && gift.length) {
+            gift.map((item, index) => {
+              giftNum += item.num
+            })
+          }
+          res.data.data.goods.allNum = giftNum;
+          this.setData({
+            orderList: res.data.data
           })
         }
-        res.data.data.goods.allNum = giftNum;
-        this.setData({
-          orderList: res.data.data
-        })
       })
     },
 
@@ -135,18 +139,6 @@ Page({
       return;
     }
     this.toNextPage( this.data.mData[`number`] )
-  },
-
-  /**
-   * 查看报名人数
-   */
-  showSignPeople () {
-    wx.showModal({
-      content: `当前报名人数：${this.data.orderList.signPeople}`,
-      showCancel: false,
-      confirmText: '知道了',
-      confirmColor: '#000000'
-    })
   },
 
   toNextPage( params ) {

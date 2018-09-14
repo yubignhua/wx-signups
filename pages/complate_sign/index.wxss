@@ -14,7 +14,7 @@ page {
 }
 
 .complate-title{
-  margin: 40rpx 0 88rpx;
+  margin: 40rpx 0 51rpx;
 }
 .complate-title-contant{
   font-size: 48rpx;
@@ -23,73 +23,57 @@ page {
   font-weight: 600;
 }
 .complate-subtitle{
-  font-size: 24rpx;
-  color: #8B9096;
+  font-size: 30rpx;
+  color: #000;
   text-align: center;
   padding-top: 10rpx;
-}
-
-.complate-map{
-  margin: 0 40rpx 50rpx 40rpx;
-}
-
-.complate-map-button{
-  position: relative;
-  width: 670rpx;
-  height: 90rpx;
-  background: #303338;
-  border-radius: 10px;
-  font-size: 36rpx;
-  color: #FFD446;
-}
-.complate-map-button image{
-  position: absolute;
-  height: 43rpx;
-  width: 50rpx;
-  top: 25rpx;
-  right: 76rpx;
-  padding-left: 50rpx;
-}
-
-.to-order{
-  margin: 0 40rpx 40rpx 50rpx;
-}
-.to-order button{
-  width: 670rpx;
-  height: 90rpx;
-  background: #FFFFFF;
-  border: 1px solid #979797;
-  border-radius: 10px;  
-  font-size: 30rpx;
-  color: #000000;
-  padding-top: 5rpx;
   font-weight: 600;
 }
 
+
+
 .empower{
-  height: 200rpx;
-  background: #fff;
-  padding: 57rpx 40rpx;
+  padding: 0 109rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.empower-info{
+  font-size: 24rpx;
+}
+.empower button{
+  width: 295rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  margin: 0;
+  background: #FFD446;
+  font-size: 30rpx;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 20rpx;
+}
+.check-info{
+  margin: 206rpx 60rpx 67rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.team-title{
-  font-size: 34rpx;
+.flex-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 295rpx;
+  height: 223rpx;
+  border: 1px solid #B6B6B6;
+  border-radius: 5px; 
+  font-size: 36rpx;
   color: #000000;
-}
-.team-subtitle{
-font-size: 24rpx;
-color: #000000;
-padding-top: 5rpx;
-}
-.empower button{
-  width: 177rpx;
-  height: 90rpx;
-  line-height: 90rpx;
+  font-weight: 600;
   margin: 0;
-  background: #FFD446;
-  border-radius: 10rpx;
-  font-size: 24rpx;
-  color: #000000;
+  padding: 0
+}
+.flex-item image{
+   width: 44rpx;
+   height: 44rpx;
+   padding-right: 14rpx;
 }
