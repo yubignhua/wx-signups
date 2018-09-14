@@ -184,5 +184,6 @@ App({
   onLaunch() {
     var that = this
     that.weixinLogin()
-  }
+  },
+  
 })

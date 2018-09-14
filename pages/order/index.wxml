@@ -74,7 +74,7 @@
 
       <view class="item-insurance info-wrapper info-gift">
         <view class="item-insurance-title">实付款</view>
-        <view class="order-price"><text style="color:#FFD446">￥{{orderList.total}}</text></view>
+        <view class="order-price"><text style="color:#FFD446">￥{{orderList.charge}}</text></view>
       </view>
     </view>
   <!-- 查订单   -->

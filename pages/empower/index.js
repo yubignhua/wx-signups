@@ -7,14 +7,16 @@ Page({
       teamId: 0,
       visible: false,
       mData: {},
-      phone: ''
+      phone: '',
+      second: 60,
+      identifyState: true
   
     },
     
     onLoad(options) {
         this.setData({
           teamName: options.name || '散客',
-          teamId: options.id
+          //teamId: options.id
         })
     },
     
@@ -112,15 +114,54 @@ Page({
   /**
    * 获取验证码
    */
-  getIdentifyCode( ){
-    wx.showToast({
-      title: '已发送',
-      icon: 'success',
-      duration: 3000
+  getIdentifyCode() {
+    if (this.data.identifyState) {
+      this.countdown();
+      wx.showToast({
+        title: '已发送',
+        icon: 'success',
+        duration: 3000
+      })
+      this.setData({
+        identifyState: false
+      })
+      // wx.pro.request({
+      //   url: '',
+      //   method: 'POST',
+      //   data: { phone: this.data.phone }
+      // }).then(() => {
+      //   this.countdown();
+      //   wx.showToast({
+      //     title: '已发送',
+      //     icon: 'success',
+      //     duration: 3000
+      //   })
+      //   this.setState({
+      //     identifyState: false
+      //   })
+      // })
+    }
+  },
+
+  /**
+   * 倒计时
+    */
+  countdown() {
+    console.log(this.data.second,'00000000')
+    if (!this.data.second) {
+      this.setData({
+        identifyState: true,
+        second: 60
+      })
+      clearTimeout(this.timmer)
+      return
+    }
+    this.setData({
+      second: this.data.second-1
     })
-    // wx.pro.request({
-    //   url: ''
-    // })
+    this.timmer = setTimeout(() => {
+      this.countdown()
+    }, 1000)
   }
 })
 

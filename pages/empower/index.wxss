@@ -121,3 +121,10 @@ page {
   font-size: 24rpx;
   padding-top: 15rpx;
 }
+
+.not-get-identify{
+  text-align: right;
+  font-size: 24rpx;
+  padding-top: 15rpx;
+  color: #e6e6e6;
+}
