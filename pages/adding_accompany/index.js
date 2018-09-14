@@ -178,7 +178,7 @@ Page({
 			carList : this.data.carList
 		})
 		this.calAllCost();
-		this.getAccompanyingPerson;
+		this.getAccompanyingPerson();
 		console.log('this.data.carList',this.data.carList)
 	},
 	/**
