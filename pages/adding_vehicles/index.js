@@ -118,8 +118,31 @@ Page({
       phoneState: phoneState
     })
   },
-
-  /**
+	
+	/**
+	 * 判断报名是否重复
+	 * @param id
+	 */
+	judgeRepeat(id){
+		let raceInfo = this.data.CarsList;
+		let isRepeat = raceInfo.some((item,index)=>{
+			if(item.idcard === id){
+				return true;
+			}
+		});
+		if(isRepeat){
+			wx.showToast({
+				title: "不能重复购买保险",
+				icon: "none"
+			});
+		}
+		return isRepeat;
+	},
+	
+	
+	
+	
+	/**
    * 新增车辆
    */
   addCar(e){
@@ -127,6 +150,13 @@ Page({
     if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
       return
     }
+		let flag = this.judgeRepeat(this.data.mData.idcard);
+    console.log("flag::::",flag)
+    if(flag){
+      return;
+    }
+    
+    
     this.checkPerson(this.data.mData,res=>{
       //将新添加的 车辆数据 插入到数组的倒数第二位
       this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
@@ -196,13 +226,17 @@ Page({
    * 点击下一步提交所有数据
    */
   submitAllData(){
-    if (!this.data.nextFlag) return;
+	  let flag = this.judgeRepeat(this.data.mData.idcard);
+	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
     console.log('CarsList:::',CarsList)
     if(CarsList.length == 1){
 	    this.checkInput(lastData);
 	    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
 		    return
+	    }
+	    if(flag){
+		    return;
 	    }
 	    this.setData({
 		    nextFlag: false
@@ -256,6 +290,9 @@ Page({
 		    this.checkInput(lastData);
 		    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
 			    return
+		    }
+		    if(flag){
+			    return;
 		    }
 		    this.setData({
 			    nextFlag: false
