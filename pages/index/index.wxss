@@ -145,6 +145,10 @@ page {
   margin: 60rpx 276rpx 23rpx;
 }
 
+.grey-style{
+  background: #bababa;
+}
+
 
 
 .index-container{

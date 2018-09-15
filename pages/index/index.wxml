@@ -16,20 +16,21 @@
     <picker bindchange="bindTeamChange" 
                 value="{{teamList[team].groupid}}" 
                 range="{{teamList}}"
-                range-key="{{'newName'}}">
+                range-key="{{'newName'}}"
+                disabled="{{!signState}}">
       <button class="team">
-        <view>{{teamList[team].newName }}</view>
+        <view>{{signState?teamList[team].newName : teamName }}</view>
         <image src="../../images/s_index_4.png"></image>
       </button>
     </picker>
-    <button class="sign-up" bindtap="changeModel" data-visible="{{true}}">立即报名</button>
+    <button class="sign-up {{signState?'':'grey-style'}}" bindtap="changeModel" data-visible="{{true}}">立即报名</button>
   </view>
 
   <view class="other-title">
     <image src="../../images/s_index_5.png"></image>
   </view>
 
-  <button class="person-sign-up" bindtap="clickPerson" data-visible="{{true}}">散客报名</button>
+  <button class="person-sign-up {{signState?'':'grey-style'}}" bindtap="clickPerson" data-visible="{{true}}">散客报名</button>
   
   <view class="bottom-logo">
     <image src="../../images/s_index_6.png"></image>

@@ -57,35 +57,7 @@ App({
       }
     })
   },
-  /**
-   * 微信登录
-   */
-  weixinLogin() {
-    var that = this
-    var data = null
-    wx.login({ //调用接口wx.login() 获取临时登录凭证（code）
-      success: function (res) {
-        if (res.code) {
-          //发起网络请求
-          wx.pro.request({
-            url: loginUrl,
-            method: 'POST',
-            data: {
-              code: res.code
-            }
-          }).then((res) => {
-            that.globalData.signUpData.entry_info.openid = res.data.data.openid;
-            that.globalData.orderid = res.data.data.orderid;
-          })
-        } else {
-          wx.showToast({
-            title: "登录失败",
-            icon: "loading"
-          })
-        }
-      }
-    })
-  },
+  
 
   /**
    * 获取用户信息
@@ -183,7 +155,6 @@ App({
   },
   onLaunch() {
     var that = this
-    that.weixinLogin()
   },
   
 })
