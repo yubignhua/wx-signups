@@ -147,7 +147,6 @@ Page({
    * 倒计时
     */
   countdown() {
-    console.log(this.data.second,'00000000')
     if (!this.data.second) {
       this.setData({
         identifyState: true,

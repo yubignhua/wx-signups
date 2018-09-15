@@ -1,8 +1,9 @@
 let app = getApp()
 let base_url = require("../../utils/urls.js")
-let loginUrl = base_url.baseUrl + '/wx/getopenid'
 let teamUrl = base_url.baseUrl + '/group/list'
 let competitionUrl = base_url.baseUrl + '/match/info'
+let orderUrl = base_url.baseUrl + '/order/getDetail'
+var loginUrl = base_url.baseUrl + '/wx/getopenid/'
 
 Page({
     data: {
@@ -17,17 +18,72 @@ Page({
       showModel: false,
       agree: false,
       count: 0,
-      signType: 0
+      signType: 0,
+      signState: true,
+      teamName: ''
     },
     
     onLoad(options) {
+        this.weixinLogin();
         this.getCompetition();
         this.getTeamList();
     },
-    
 
-  
-  /**
+    /**
+     * 微信登录
+     */
+    weixinLogin() {
+        var that = this;
+        wx.login({ //调用接口wx.login() 获取临时登录凭证（code）
+            success: function (res) {
+                if (res.code) {
+
+                    //发起网络请求
+                    wx.pro.request({
+                        url: loginUrl,
+                        method: 'POST',
+                        data: {
+                            code: res.code
+                        }
+                    }).then((res) => {
+                        app.globalData.signUpData.entry_info.openid = res.data.data.openid;
+                        that.getOrder( res.data.data.openid )
+                    })
+                } else {
+                    wx.showToast({
+                        title: "登录失败",
+                        icon: "loading"
+                    })
+                }
+            }
+        })
+    },
+
+    /**
+     * 获取订单信息
+     */
+    getOrder( openid ){
+      wx.pro.request({
+          url: orderUrl,
+          method: 'POST',
+          data: {
+              openid: openid,
+              orderid: ''
+          }
+      }).then((res)=>{
+          if( Object.keys(res.data.data.racer_info).length ){
+              this.setData({
+                  signButton: false,
+                  showModel: false,
+                  signState: false,
+                teamName: res.data.data.groupname == '散客' ? '请选择大队' : res.data.data.groupname
+              })
+          }
+      })
+    },
+
+
+    /**
   * 获取比赛信息
   */
   getCompetition() {
@@ -41,8 +97,6 @@ Page({
       app.globalData.signUpData.mid = Number(res.data.data.mid);
       app.globalData.signUpData.detail.goods.gift[0].id = res.data.data.goods.gift[0].id;
       app.globalData.signUpData.detail.goods.insur = res.data.data.goods.insur;
-
-      
     })
   },
     /**
@@ -96,12 +150,18 @@ Page({
    * 选择散客
    */
   clickPerson() {
+    this.data.signState?
     this.setData({
       signButton: true,
       team: 0,
       showModel: true,
       signType: 0
-    })
+      }) : wx.showModal({
+        content: '您已生成过订单，请前往“订单”查看',
+        showCancel: false,
+        confirmText: '确定',
+        confirmColor: '#000000'
+      })
   },
 
   /**
@@ -112,12 +172,18 @@ Page({
       this.setData({
         showModel: event.target.dataset.visible,
         signType: 1
-      }) : wx.showModal({
+      }) : this.data.signState?
+      wx.showModal({
         content: '请选择加入的大队',
         showCancel: false,
         confirmText: '知道了',
         confirmColor: '#000000'
-      })
+        }) : wx.showModal({
+          content: '您已生成过订单，请前往“订单”查看',
+          confirmText: '确定',
+          showCancel: false,
+          confirmColor: '#000000'
+        })
   },
 
   continueSign(){
