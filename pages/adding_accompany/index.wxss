@@ -14,7 +14,7 @@ page {
 .title-car{
   display: flex;
   align-items: center;
-  padding:37rpx 0 14rpx 19rpx;
+  padding:10rpx 0 14rpx 19rpx;
 
 
 }
@@ -32,10 +32,15 @@ page {
   
 }
 .person-content{
-  margin: 26rpx 20rpx 49rpx;
+  margin: 26rpx 0rpx 49rpx;
   background: #fff;
   border-radius: 20rpx;
   height: 455rpx;
+
+  padding-top:20rpx;
+  padding-left:30rpx;
+  padding-right:30rpx;
+
 }
 .doctor-img {
   width: 100%;
@@ -49,7 +54,6 @@ page {
   display: flex;
   flex-wrap: nowrap;
   white-space: nowrap;
-  margin-top: 23rpx;
 }
 
 .car-wrapper{
@@ -88,8 +92,10 @@ page {
   margin-left: 20rpx;
 }
 .person-contant{
-   padding: 60rpx 30rpx 70rpx;
    height: 71rpx;
+     padding-top:70rpx;
+     padding-left:30rpx;
+     padding-right:30rpx;
 }
 .person-wrapper{
   display: inline-block;
@@ -158,7 +164,15 @@ page {
 .warm-tip{
   color:#BEBEBE;
 }
-.add_person_img{}
+.add_person_img{
+padding-right:10px;
+font-size:40rpx;
+text-align:center;
+line-height:40rpx;
+position:relative;
+top:-3rpx;
+color:#FFB202
+}
 
 
 
@@ -197,9 +211,14 @@ page {
   align-items: center;
   justify-content:space-between;
   bottom:110rpx;
-  margin: 18rpx 40rpx 0;
   border-top: 1px solid #C0C0C0;
-  padding-top: 28rpx;
+  position:fixed;
+  width:100%;
+  padding:10rpx 30rpx;
+  box-sizing:border-box;
+  height:178rpx;
+
+
 }
 .good_wrapper{
   float: left;
@@ -207,7 +226,10 @@ page {
 .good_calc{
   
   display: flex;
-  align-items: center
+  align-items: center;
+  background: rgba(255,255,255,0.47);
+  border: 2rpx solid #CECECE;
+  border-radius: 14rpx;
 }
 
 
@@ -215,17 +237,36 @@ page {
 .good_title{
   font-size: 30rpx;
   color: #3D4045;
-  margin-top: 30rpx;
   font-weight: 600;
 }
 .good_content{
   font-size: 24rpx;
   color: #00003C;
+  display:inline-block;
+  width:268rpx;
+	color:999999
 }
+.calc_delet{
+border-right:2rpx solid #CECECE!important;
+border-radius:0
 
 
+}
+.calc_plug{
+border-left:2rpx solid #CECECE!important;
+border-radius:0
+
+}
 .calc_num{
-  padding: 10px
+  padding: 10rpx;
+  width:59rpx;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+
+
 }
 .calc_item{
   border: none

@@ -22,8 +22,9 @@
       <image class="title-mark" src="../../images/s_vehicles_1.png"></image>
       <view class="title-person-contant">随行人员保险</view>
     </view>
-    <scroll-view class="car-scroll" scroll-x style="border: 0;width: 100%">
-    <view class="title-tip">*  沙漠活动有风险，建议为同行伙伴也购买保险</view>
+        <view class="title-tip">*  沙漠活动有风险，建议为同行伙伴也购买保险</view>
+
+    <scroll-view class="car-scroll" scroll-x style="border: 0;width: 100%;height:120px">
     <view class="person-contant">
       <view class="person-wrapper" wx:for="{{carList[carIndex].personInsurance}}" wx:key="*this.id">
         <image src="../../images/s_accompany_1.png" class="delete" bindtap="deletPerson" data-index="{{index}}"></image>
@@ -31,9 +32,9 @@
       </view>
     </view>
     </scroll-view>
-    <view class="add-person">
-      <image src="../../images/s_vehicles_3.png" class='add_person_img' bindtap="showPersonModel"></image>
-      <view style='display:inline;color: #FFD446'>添加被保险人</view>
+    <view class="add-person" style="margin-top:-10rpx">
+      <view class='add_person_img' bindtap="showPersonModel">+</view>
+      <view bindtap="showPersonModel" style='display:inline;color: #FFD446;font-size:30rpx'>添加被保险人</view>
     </view>
     </view>
     

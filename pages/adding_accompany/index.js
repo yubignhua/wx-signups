@@ -24,6 +24,7 @@ Page({
 
   onLoad: function (options) {
     //获取车辆信息并添加随行人员字段
+	  //app.globalData.signUpData.detail.racer_info =  [{ name: '', idcard: '', mobile: '', eid: '' }]
     let raceInfo = app.globalData.signUpData.detail.racer_info;
     for (let i = 0; i < raceInfo.length; i++) {
       raceInfo[i].personInsurance = [];
@@ -85,7 +86,7 @@ Page({
   changeCar(e) {
     this.setData({
       carIndex: e.target.dataset.imgindex
-    })
+    });
     console.log("carIndex:::", this.data.carIndex)
   },
   showPersonModel() {
@@ -158,13 +159,37 @@ Page({
       idState: idState,
     })
   },
-
-
-
-
-
-
-  /**
+	
+	/**
+	 * 判断报名是否重复
+	 * @param id
+	 */
+	judgeRepeat(id){
+		this.getAccompanyingPerson();
+		let suixing_info = app.globalData.signUpData.detail.suixing_info,
+			raceInfo = app.globalData.signUpData.detail.racer_info;
+		let newArr = [...suixing_info,...raceInfo];
+		let isRepeat = newArr.some((item,index)=>{
+			if(item.idcard === id){
+				return true;
+			}
+		});
+		if(isRepeat){
+			wx.showToast({
+				title: "不能重复购买保险",
+				icon: "none"
+			});
+		}
+		return isRepeat;
+	},
+	
+	
+	
+	
+	
+	
+	
+	/**
    * 增加随行人员保险
    */
   continueSign() {
@@ -172,6 +197,8 @@ Page({
     if (!this.data.nameState || !this.data.idState) {
       return
     }
+		let flag = this.judgeRepeat(this.data.mData.idcard);
+		if(flag) return;
     this.checkPerson(this.data.mData,res=>{
       this.changeModel();
       this.data.carList[this.data.carIndex].personInsurance.push(this.data.mData);
@@ -254,20 +281,23 @@ Page({
    * 获取随行人员数据并存储
    */
   getAccompanyingPerson() {
-    var carList = this.data.carList;
+    let {carList} = this.data;
     if (carList.length <= 0) return;
     let arr = [];
-    for (var i = 0; i < carList.length; i++) {
-      arr =  [...carList[i].personInsurance,...arr]
-      //arr = arr.concat(carList[i].personInsurance)
-    }
-    getApp().globalData.signUpData.detail.suixing_info = arr;
+    carList.map((item,index)=>{
+	    arr =  [...carList[index].personInsurance,...arr]
+    });
+    //
+    // for (let i = 0; i < carList.length; i++) {
+    //   arr =  [...carList[i].personInsurance,...arr]
+    //   //arr = arr.concat(carList[i].personInsurance)
+    // }
+    app.globalData.signUpData.detail.suixing_info = arr;
     this.setData({
       accompanyingPerson:arr.length
     })
   },
 
-  
 
   /**
    * 立即支付(提交订单)

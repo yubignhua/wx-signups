@@ -6,7 +6,7 @@ Page({
   data: {
     toView: 'red',
     scrollTop: 100,
-    CarsList: [{ name: '', iden: '', phone: '', e_id: '' }],//控制表单数量的状态
+    CarsList: [{ name: '', idcard: '', mobile: '', eid: '' }],//控制表单数量的状态
     flagList: [false],
     indicatorDots: false,
     current:0,
@@ -45,15 +45,13 @@ Page({
    */
   formSubmit (e) {
     this.data.mData = e.detail.value;
-
   },
 
   /**
    * 删除车辆
    */
   deleteCar(event){
-    var index = event.currentTarget.dataset['index'];
-    //console.log('index:::',index)
+    let index = event.currentTarget.dataset['index'];
     this.data.dataList.splice(index, 1);
     this.data.CarsList.splice(index, 1);
     this.data.flagList.splice(index, 1);
@@ -61,7 +59,7 @@ Page({
     if(index === 0)
       curState = index;
     else
-      curState = index - 1
+      curState = index - 1;
     this.setData({
       dataList: this.data.dataList,
       CarsList: this.data.CarsList,
@@ -109,8 +107,6 @@ Page({
         content: '请填写正确的手机号码',
         showCancel: false,
         confirmColor: "#000000"
-
-
       })
       phoneState = false
     }else{
@@ -132,12 +128,11 @@ Page({
       return
     }
     this.checkPerson(this.data.mData,res=>{
-      //this.data.CarsList[this.data.current] = this.data.mData;
-      this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData)
-      this.data.dataList.push(this.data.mData);
-      // this.data.flagList.push(false)
-      // this.data.flagList[this.data.flagList.length - 2] = true;
-      this.data.flagList.splice(this.data.flagList.length - 1, 0, true)
+      //将新添加的 车辆数据 插入到数组的倒数第二位
+      this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
+	    this.data.flagList.splice(this.data.flagList.length - 1, 0, true)
+	
+	    this.data.dataList.push(this.data.mData);
       this.setData({
         CarsList: this.data.CarsList,
         current: this.data.CarsList.length - 1,
@@ -202,50 +197,108 @@ Page({
    */
   submitAllData(){
     if (!this.data.nextFlag) return;
-    this.checkInput(this.data.lastData);
-    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
-      return
-    }
-    this.setData({
-      nextFlag: false
-    })
-    this.checkPerson(this.data.lastData,res => {
-      this.data.dataList.push(this.data.lastData);
-      app.globalData.signUpData.detail.racer_info = this.data.dataList;
-      this.setData({
-        nextFlag: true,
-        lastData:{}
-      })
-      //页面跳转
-      wx.redirectTo({
-        url: '../adding_accompany/index'
-      })
-      
-    },res=>{
-      //验证失败
-      this.setData({
-        nextFlag: true
-      })
-      if(res.data.code == 1008){
-        wx.showToast({
-          title: "不能重复报名",
-          icon: 'none'
-        })
-      }else{
-        wx.showToast({
-          title: "实名认证失败",
-          icon: 'none'
-        })
+    let {CarsList,lastData} = this.data;
+    console.log('CarsList:::',CarsList)
+    if(CarsList.length == 1){
+	    this.checkInput(lastData);
+	    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
+		    return
+	    }
+	    this.setData({
+		    nextFlag: false
+	    });
+	    this.checkPerson(lastData,res => {
+		    this.data.dataList.push(lastData);
+		    app.globalData.signUpData.detail.racer_info = this.data.dataList;
+		    this.setData({
+			    nextFlag: true,
+			    lastData:{}
+		    });
+		    //页面跳转
+		    wx.redirectTo({
+			    url: '../adding_accompany/index'
+		    })
+	    },res=>{
+		    //验证失败
+		    if(res.data.code == 1008){
+			    wx.showToast({
+				    title: "不能重复报名",
+				    icon: 'none'
+			    })
+		    }else{
+			    wx.showToast({
+				    title: "实名认证失败",
+				    icon: 'none'
+			    })
+		    }
+		    this.setData({
+			    nextFlag: true
+		    })
+	    })
+    }else{
+      if(!lastData.name || !lastData.mobile || !lastData.idcard){
+	      wx.showModal({
+		      title: '提示',
+		      content: '由于您填写的信息不全,此次添加不会生效,是否继续?',
+		      confirmColor:"#000000",
+		      success:res=>{
+		        if(res.confirm){
+			        app.globalData.signUpData.detail.racer_info = this.data.dataList;
+			        wx.redirectTo({
+				        url: '../adding_accompany/index'
+			        })
+            }
+          }
+	      })
+        
       }
-    })
+	    if(lastData.name && lastData.mobile && lastData.idcard){
+		    this.checkInput(lastData);
+		    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
+			    return
+		    }
+		    this.setData({
+			    nextFlag: false
+		    });
+		    this.checkPerson(lastData,res => {
+			    this.data.dataList.push(lastData);
+			    app.globalData.signUpData.detail.racer_info = this.data.dataList;
+			    this.setData({
+				    nextFlag: true,
+				    lastData:{}
+			    });
+			    //页面跳转
+			    wx.redirectTo({
+				    url: '../adding_accompany/index'
+			    })
+		    },res=>{
+			    //验证失败
+			    if(res.data.code == 1008){
+				    wx.showToast({
+					    title: "不能重复报名",
+					    icon: 'none'
+				    })
+			    }else{
+				    wx.showToast({
+					    title: "实名认证失败",
+					    icon: 'none'
+				    })
+			    }
+			    this.setData({
+				    nextFlag: true
+			    })
+		    })
+		
+	    }
+      
+    }
+    
+    
+    
+  
 
 
-    // this.data.dataList.push(this.data.lastData);
-    // app.globalData.detail.racer_info = this.data.dataList;
-    // this.data.nextFlag = false;
-    // wx.navigateTo({
-    //   url: "../adding_accompany/index"
-    // })
+ 
 
    
   }

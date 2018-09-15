@@ -1,9 +1,12 @@
 {
-    "pages": [ 
-        "pages/index/index",
-        "pages/adding_accompany/index",             
-        "pages/complate_sign/index",
-        "pages/adding_vehicles/index",
+    "pages": [
+
+      "pages/index/index",
+      "pages/adding_accompany/index",
+
+      "pages/adding_vehicles/index",
+
+      "pages/complate_sign/index",
         "pages/order_number/index",
         "pages/order/index",
         "pages/empower/index",
