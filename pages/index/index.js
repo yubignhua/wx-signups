@@ -195,6 +195,7 @@ Page({
     })
     app.globalData.signUpData.group_id = this.data.signType?this.data.teamList[this.data.team].groupid:0;
     app.globalData.signUpData.group_name = this.data.signType?this.data.teamList[this.data.team].name:'';
+    console.log()
     wx.navigateTo({
       url: "../adding_vehicles/index"
     })

@@ -14,11 +14,10 @@ Page({
     },
     
     onLoad: function (options) {
-      let openId = app.globalData.signUpData.entry_info.openid;
-      let orderId = app.globalData.orderid;
-      if (openId ){
-        this.getOrder()
-      }
+      
+    },
+    onShow(){
+      this.getOrder()
     },
 
     /**
@@ -40,7 +39,7 @@ Page({
           let giftNum = 0;
           if (gift && gift.length) {
             gift.map((item, index) => {
-              giftNum += item.num
+              giftNum = Number(giftNum) + Number(item.num)
             })
           }
           res.data.data.goods.allNum = giftNum;

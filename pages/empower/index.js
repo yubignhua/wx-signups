@@ -5,48 +5,48 @@ let getEmpowerNum = base_url.baseUrl + '/group/autho_list'
 let getCode = base_url.baseUrl + '/wx/code'
 
 Page({
-    data: {
-      teamName:'',
-      teamId: 0,
-      visible: false,
-      mData: {},
-      phone: '',
-      second: 60,
-      identifyState: true,
-      empowerType: true,
-      empowerTeam: null,
-      code: ''
-    },
-    
-    onLoad(options) {
-      
-        this.setData({
-          //teamId: options.id
-          teamId: ''
-        },()=>{
-          this.getEmpowerNum()
-        })
-    },
-    
-    /**
-     * 获取授权数量
-     */
-    getEmpowerNum(){
-      wx.pro.request({
-        url: getEmpowerNum,
-        method: 'POST'
-      }).then((res)=>{
-        let empowerTeam = res.data.data && res.data.data.length ?
-        res.data.data.find((team)=>{return team.groupid == this.data.teamId}): null
-        console.log(empowerTeam,'------------')
-        this.setData({
-          empowerTeam: empowerTeam? empowerTeam:null
-        },()=>{
-          console.log(this.data.empowerTeam,'1111111111')
-        })
+  data: {
+    teamName: '',
+    teamId: 0,
+    visible: false,
+    mData: {},
+    phone: '',
+    second: 60,
+    identifyState: true,
+    empowerType: true,
+    empowerTeam: null,
+    code: ''
+  },
+
+  onLoad(options) {
+
+    this.setData({
+      //teamId: options.id
+      teamId: '100052'
+    }, () => {
+      this.getEmpowerNum()
+    })
+  },
+
+  /**
+   * 获取授权数量
+   */
+  getEmpowerNum() {
+    wx.pro.request({
+      url: getEmpowerNum,
+      method: 'POST'
+    }).then((res) => {
+      let empowerTeam = Number(this.data.teamId) ?
+        res.data.data.find((selectName) => {
+          return selectName.groupid == this.data.teamId
+        }) : null;
+      this.setData({
+        empowerTeam: empowerTeam ? empowerTeam : null
       })
-    },
-    
+      
+    })
+  },
+
 
   /**
    * 点击授权
@@ -54,11 +54,11 @@ Page({
   empower(e) {
     let that = this;
     let team = this.data.empowerTeam;
-    if(e.target.dataset.type){
+    if (e.target.dataset.type) {
       this.setData({
         visible: true
       })
-    }else{
+    } else {
       if (team) {
         if (team.num == 0) {
           wx.showToast({
@@ -71,9 +71,9 @@ Page({
             cancelText: '再想想',
             confirmText: '确定',
             confirmColor: '#000000',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
-                that.submitEmpower(that.data.empowerTeam.groupid,'','')
+                that.submitEmpower(that.data.empowerTeam.groupid, '', '')
               }
             }
           })
@@ -86,11 +86,11 @@ Page({
       }
     }
 
-    
+
 
   },
 
-  changeModel(){
+  changeModel() {
     this.setData({
       visible: false
     })
@@ -127,11 +127,11 @@ Page({
     }
     this.setData({
       visible: false
-    },()=>{
+    }, () => {
       wx.showModal({
         title: '提示',
         content: `授权后不可撤回，确定授权给手机号${this.data.mData.phone}吗？`,
-        success: function (res) {
+        success: function(res) {
           if (res.confirm) {
             that.submitEmpower("", that.data.code, that.data.mData[`phone`])
           }
@@ -143,7 +143,7 @@ Page({
   /**
    * 提交授权
    */
-  submitEmpower( params,code, tel ) {
+  submitEmpower(params, code, tel) {
     wx.pro.request({
       url: empowerUrl,
       method: 'POST',
@@ -153,19 +153,21 @@ Page({
         verity: code,
         tel: tel
       }
-    }).then((res)=>{
-      console.log(res,'66666666666')
-      if(res.data.code == 1000){
+    }).then((res) => {
+      console.log(res, '66666666666')
+      if (res.data.code == '1000') {
         wx.showToast({
           title: '授权成功'
         })
-        wx.switchTab({
-          url: '../order/index',
+        setTimeout(() => {
+          wx.switchTab({
+            url: '../order/index',
+          })
         })
       }
     })
   },
-  getPhone(e){
+  getPhone(e) {
     this.setData({
       phone: e.detail.value
     })
@@ -178,37 +180,39 @@ Page({
       wx.pro.request({
         url: getCode,
         method: 'POST',
-        data: { tel: this.data.phone }
+        data: {
+          tel: this.data.phone
+        }
       }).then((res) => {
-        if (res.data.code == 1001 || res.data.code == 1002){
+        if (res.data.code == 1001 || res.data.code == 1002) {
           wx.showToast({
             title: res.data.msg,
             icon: 'none'
           })
         }
-        if(res.data.code == 1000){
+        if (res.data.code == 1000) {
           this.setData({
             code: res.data.data.verity,
             identifyState: false
-        },()=>{
-          this.countdown();
-          wx.showToast({
-            title: '已发送',
-            icon: 'success',
-            duration: 2000
+          }, () => {
+            this.countdown();
+            wx.showToast({
+              title: '已发送',
+              icon: 'success',
+              duration: 2000
+            })
           })
-        })
-          
+
         }
-        
-        
+
+
       })
     }
   },
 
   /**
    * 倒计时
-    */
+   */
   countdown() {
     if (!this.data.second) {
       this.setData({
@@ -219,11 +223,10 @@ Page({
       return
     }
     this.setData({
-      second: this.data.second-1
+      second: this.data.second - 1
     })
     this.timmer = setTimeout(() => {
       this.countdown()
     }, 1000)
   }
 })
-
