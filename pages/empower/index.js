@@ -1,5 +1,8 @@
 let app = getApp()
 let base_url = require("../../utils/urls.js")
+let empowerUrl = base_url.baseUrl + '/group/autho'
+let getEmpowerNum = base_url.baseUrl + '/group/autho_list'
+let getCode = base_url.baseUrl + '/wx/code'
 
 Page({
     data: {
@@ -9,45 +12,82 @@ Page({
       mData: {},
       phone: '',
       second: 60,
-      identifyState: true
-  
+      identifyState: true,
+      empowerType: true,
+      empowerTeam: null,
+      code: ''
     },
     
     onLoad(options) {
+      
         this.setData({
-          teamName: options.name || '散客',
           //teamId: options.id
+          teamId: ''
+        },()=>{
+          this.getEmpowerNum()
         })
     },
     
-
+    /**
+     * 获取授权数量
+     */
+    getEmpowerNum(){
+      wx.pro.request({
+        url: getEmpowerNum,
+        method: 'POST'
+      }).then((res)=>{
+        let empowerTeam = res.data.data && res.data.data.length ?
+        res.data.data.find((team)=>{return team.groupid == this.data.teamId}): null
+        console.log(empowerTeam,'------------')
+        this.setData({
+          empowerTeam: empowerTeam? empowerTeam:null
+        },()=>{
+          console.log(this.data.empowerTeam,'1111111111')
+        })
+      })
+    },
     
 
   /**
    * 点击授权
    */
   empower(e) {
-    if( e.target.dataset.type ){
+    let that = this;
+    let team = this.data.empowerTeam;
+    if(e.target.dataset.type){
       this.setData({
         visible: true
       })
     }else{
-      this.data.teamName !== '散客'?
-      wx.showModal({
-        content: `授权后不可撤回，确认授权给${this.data.teamName}吗？`,
-        cancelText: '再想想',
-        confirmText: '确定',
-        confirmColor: '#000000',
-        success: function(res){
-          if (res.confirm) {
-            this.submitEmpower()
-          }
+      if (team) {
+        if (team.num == 0) {
+          wx.showToast({
+            title: '名额已满',
+            icon: 'none'
+          })
+        } else {
+          wx.showModal({
+            content: `授权后不可撤回，确认授权给${this.data.empowerTeam.name}吗？`,
+            cancelText: '再想想',
+            confirmText: '确定',
+            confirmColor: '#000000',
+            success: function (res) {
+              if (res.confirm) {
+                that.submitEmpower(that.data.empowerTeam.groupid,'','')
+              }
+            }
+          })
         }
-      }):
-      wx.showToast({
-        title: '不可授权给散客',
-      })
+      } else {
+        wx.showToast({
+          title: '请授权给个人',
+          icon: 'none'
+        })
+      }
     }
+
+    
+
   },
 
   changeModel(){
@@ -69,7 +109,7 @@ Page({
    * 确定授权给个人
    */
   continueSign() {
-
+    var that = this;
     if (!this.data.mData[`phone`]) {
       wx.showModal({
         title: '提示',
@@ -78,10 +118,10 @@ Page({
       return;
     }
 
-    if (!this.data.mData[`identify-code`]) {
+    if (!this.data.mData[`identify-code`] || this.data.code != this.data.mData[`identify-code`]) {
       wx.showModal({
         title: '提示',
-        content: '请填写验证码'
+        content: '请填写正确的验证码'
       })
       return;
     }
@@ -93,7 +133,7 @@ Page({
         content: `授权后不可撤回，确定授权给手机号${this.data.mData.phone}吗？`,
         success: function (res) {
           if (res.confirm) {
-            this.submitEmpower()
+            that.submitEmpower("", that.data.code, that.data.mData[`phone`])
           }
         }
       })
@@ -103,8 +143,27 @@ Page({
   /**
    * 提交授权
    */
-  submitEmpower( params ) {
-
+  submitEmpower( params,code, tel ) {
+    wx.pro.request({
+      url: empowerUrl,
+      method: 'POST',
+      data: {
+        openid: app.globalData.signUpData.entry_info.openid,
+        groupid: params,
+        verity: code,
+        tel: tel
+      }
+    }).then((res)=>{
+      console.log(res,'66666666666')
+      if(res.data.code == 1000){
+        wx.showToast({
+          title: '授权成功'
+        })
+        wx.switchTab({
+          url: '../order/index',
+        })
+      }
+    })
   },
   getPhone(e){
     this.setData({
@@ -116,30 +175,34 @@ Page({
    */
   getIdentifyCode() {
     if (this.data.identifyState) {
-      this.countdown();
-      wx.showToast({
-        title: '已发送',
-        icon: 'success',
-        duration: 3000
+      wx.pro.request({
+        url: getCode,
+        method: 'POST',
+        data: { tel: this.data.phone }
+      }).then((res) => {
+        if (res.data.code == 1001 || res.data.code == 1002){
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+        if(res.data.code == 1000){
+          this.setData({
+            code: res.data.data.verity,
+            identifyState: false
+        },()=>{
+          this.countdown();
+          wx.showToast({
+            title: '已发送',
+            icon: 'success',
+            duration: 2000
+          })
+        })
+          
+        }
+        
+        
       })
-      this.setData({
-        identifyState: false
-      })
-      // wx.pro.request({
-      //   url: '',
-      //   method: 'POST',
-      //   data: { phone: this.data.phone }
-      // }).then(() => {
-      //   this.countdown();
-      //   wx.showToast({
-      //     title: '已发送',
-      //     icon: 'success',
-      //     duration: 3000
-      //   })
-      //   this.setState({
-      //     identifyState: false
-      //   })
-      // })
     }
   },
 

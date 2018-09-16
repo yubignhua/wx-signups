@@ -114,7 +114,7 @@ Page({
   toEmpower(){
     if (!this.data.orderList.authoname){
       wx.navigateTo({
-        url: `../empower/index?name=${this.data.orderList.groupname}&id=${this.data.orderList.teamId}`
+        url: `../empower/index?id=${this.data.orderList.teamId}`
       })
     }else{
       wx.showToast({

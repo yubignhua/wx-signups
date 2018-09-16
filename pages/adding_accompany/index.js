@@ -87,7 +87,6 @@ Page({
     this.setData({
       carIndex: e.target.dataset.imgindex
     });
-    console.log("carIndex:::", this.data.carIndex)
   },
   showPersonModel() {
     this.setData({

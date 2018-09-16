@@ -3,17 +3,17 @@
   <view class="empower-title">*请选择代领人，授权后不可撤回</view>
   <view class="empower-cantant">
     <view>
-      <view class="empower-team">{{teamName}}</view>
-      <view class="empower-explain">名额100 截止时间9月25日</view>
+      <view class="empower-team">{{empowerTeam?empowerTeam.name : '散客'}}</view>
+      <view class="empower-explain">名额{{empowerTeam?empowerTeam.num:0}} 截止时间{{empowerTeam?empowerTeam.dndtime:'9月25日'}}</view>
     </view>
-    <button bindtap="empower" data-type="{{0}}">授权</button>
+    <button bindtap="empower" data-type="{{false}}">授权</button>
   </view>
   <view class="empower-cantant">
     <view>
       <view class="empower-team">个人</view>
       <view class="empower-explain">需对方已成功报名</view>
     </view>
-    <button bindtap="empower" data-type="{{1}}">授权</button>
+    <button bindtap="empower" data-type="{{true}}">授权</button>
   </view>
 
   <view class="model {{visible?'':'hide-model'}}">

@@ -1,6 +1,6 @@
 let app = getApp()
 let base_url = require("../../utils/urls.js")
-let teamUrl = base_url.baseUrl + '/group/list'
+let empowerUrl = base_url.baseUrl + '/group/autho_list'
 
 
 Page({
@@ -30,17 +30,17 @@ Page({
     })
   },
   /**
-   * 获取大队信息
+   * 获取授权数量
    */
   getTeamList() {
     wx.pro.request({
-      url: teamUrl,
+      url: empowerUrl,
       method: 'POST',
     }).then((res) => {
       let team = res.data.data && res.data.data.length ?
-      res.data.data.find((item, index) => { return item.groupid === this.data.teamId }) : null;
+      res.data.data.find((item, index) => { return item.groupid == this.data.teamId }) : null;
      this.setData({
-       teamNum: team.num
+       empowerTeam: team ? team : null
      })
     })
   },
@@ -49,7 +49,7 @@ Page({
   toEmpower(){
     let teamName = app.globalData.signUpData.group_name
     wx.navigateTo({
-      url: `../empower/index?teamName=${teamName} `,
+      url: `../empower/index?id=${teamId} `,
     })
   },
   toOrder () {

@@ -24,10 +24,13 @@ Page({
     },
     
     onLoad(options) {
-        this.weixinLogin();
+        
         this.getCompetition();
         this.getTeamList();
     },
+  onShow(option) {
+    this.weixinLogin();
+  },
 
     /**
      * 微信登录

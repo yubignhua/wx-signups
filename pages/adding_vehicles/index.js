@@ -229,7 +229,7 @@ Page({
 	  let flag = this.judgeRepeat(this.data.mData.idcard);
 	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
-    console.log('CarsList:::',CarsList)
+    app.globalData.signUpData.entry_info.mobile = CarsList[0].mobile;
     if(CarsList.length == 1){
 	    this.checkInput(lastData);
 	    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
