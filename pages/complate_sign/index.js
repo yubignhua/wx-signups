@@ -49,9 +49,11 @@ Page({
   toEmpower(){
     let teamName = app.globalData.signUpData.group_name
     let teamId = app.globalData.signUpData.group_id
+    //let teamId = "100000"
     wx.navigateTo({
-      url: `../empower/index?id=${teamId} `,
+      url: `../empower/index?id=${teamId}`,
     })
+    
   },
   toOrder () {
     wx.switchTab({

@@ -19,29 +19,34 @@ Page({
   },
 
   onLoad(options) {
+    let team_id = options.id
+    console.log(team_id)
 
     this.setData({
-      teamId: options.id
+      teamId: team_id
       //teamId: '100052'
     }, () => {
-      this.getEmpowerNum()
+      this.getEmpowerNum(this.data.teamId)
+      
     })
   },
 
   /**
    * 获取授权数量
    */
-  getEmpowerNum() {
+  getEmpowerNum(params) {
     wx.pro.request({
       url: getEmpowerNum,
       method: 'POST'
     }).then((res) => {
-      let empowerTeam = Number(this.data.teamId) ?
+      let empowerTeam = 
         res.data.data.find((selectName) => {
-          return selectName.groupid == this.data.teamId
-        }) : null;
+          return selectName.groupid == params
+        })
       this.setData({
         empowerTeam: empowerTeam ? empowerTeam : null
+      },()=>{
+        console.log(this.data.empowerTeam)
       })
       
     })
@@ -154,7 +159,6 @@ Page({
         tel: tel
       }
     }).then((res) => {
-      console.log(res, '66666666666')
       if (res.data.code == '1000') {
         wx.showToast({
           title: '授权成功'

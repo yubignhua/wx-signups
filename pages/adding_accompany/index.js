@@ -48,9 +48,6 @@ Page({
     }
     var goodCost = this.data.goodNum * 60;
 
-    console.log("carCost::", carCost);
-    console.log("personCost::", personCost);
-    console.log("goodCost::", goodCost);
     var all = goodCost + carCost + personCost;
     this.setData({
       allCost: all
@@ -62,7 +59,6 @@ Page({
    * 展示订单
    */
   showOrder() {
-    console.log(this.data.visible2)
     this.setData({
       visible2: !this.data.visible2
     })
@@ -302,7 +298,9 @@ Page({
    * 立即支付(提交订单)
    */
   submitAllData() {
+    
     this.getAccompanyingPerson();
+    app.globalData.signUpData.entry_info.mobile = app.globalData.signUpData.detail.racer_info[0].mobile;
     app.globalData.signUpData.detail.goods.gift[0].num = this.data.goodNum;
     app.globalData.signUpData.charge = this.data.allCost;
     var insur = app.globalData.signUpData.detail.goods.insur;
@@ -315,7 +313,7 @@ Page({
       url: orderUrl,
       method: "POST",
       // contentType:'text/html;charset=utf-8',
-      data: app.globalData.signUpData,
+      data: { ...app.globalData.signUpData, times: new Date().getTime()}
     }).then((res) => {
       let mData = res.data;
       //调起原生支付
@@ -330,11 +328,9 @@ Page({
             'signType': mData.data.signType,
             'paySign': mData.data.paySign,
             'success': function (res) {
-              
               wx.redirectTo({
                 url: '../complate_sign/index',
               })
-              
              },
             'fail': function (res) { 
 

@@ -151,7 +151,6 @@ Page({
       return
     }
 		let flag = this.judgeRepeat(this.data.mData.idcard);
-    console.log("flag::::",flag)
     if(flag){
       return;
     }
@@ -170,7 +169,6 @@ Page({
         dataList: this.data.dataList,
         lastData: {}
       })
-      console.log(res,'resres')
     },res=>{
       if(res.data.code == 1008){
         wx.showToast({
@@ -204,6 +202,11 @@ Page({
     }).then((res) => {
       if(res.data.code == 1000){
         callback(res);
+      } else if (res.data.code == 1007){
+        wx.showToast({
+          title: res.data.msg,
+          icon: "none"
+        })
       }else{
         error(res);
       }

@@ -12,6 +12,7 @@
     <view>时间：10月1日  至  10月5日</view>
   </view>
 
+  <view class="new-title">越野e族大队及俱乐部入口</view>
   <view class="select-team">
     <picker bindtap="signTip" 
                 bindchange="bindTeamChange" 

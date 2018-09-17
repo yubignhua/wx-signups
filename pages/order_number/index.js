@@ -36,8 +36,6 @@ Page({
         res.data.data.goods.allNum = giftNum;
         this.setData({
           orderList: res.data.data
-        },()=>{
-          console.log(this.data.orderList.goods.allNum)
         })
       }
       

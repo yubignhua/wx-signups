@@ -33,7 +33,6 @@ Page({
         contentType: 'application/json;charset=utf-8',
         method: 'POST'
       }).then(( res )=>{
-        console.log(res)
         if(res.data.code === "1000"){
           let gift = res.data.data && res.data.data.goods.gift;
           let giftNum = 0;
@@ -54,7 +53,6 @@ Page({
      * 展示二维码
      */
   changeCodeModel(e){
-    console.log(e)
     if ( !this.data.orderList.authoname ){
       this.setData({
         showCode: e.target.dataset.visible
@@ -114,6 +112,7 @@ Page({
     if (!this.data.orderList.authoname){
       wx.navigateTo({
         url: `../empower/index?id=${this.data.orderList.teamId}`
+        //url: `../empower/index?id=100052`
       })
     }else{
       wx.showToast({
