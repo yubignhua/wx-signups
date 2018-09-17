@@ -41,7 +41,7 @@ Page({
         })
       }
       
-      if (!res.data.data.racer_info || !res.data.data.racer_info.info.length){
+      if (!res.data.data.groupname){
         wx.showModal({
           title: '提示',
           content: '没有查询到相关内容，请核对您的订单号或身份证号',

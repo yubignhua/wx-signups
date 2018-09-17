@@ -42,7 +42,7 @@ page {
   font-size: 24rpx;
 }
 .empower button{
-  width: 295rpx;
+  width: 375rpx;
   height: 98rpx;
   line-height: 98rpx;
   margin: 0;

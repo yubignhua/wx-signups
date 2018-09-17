@@ -21,8 +21,8 @@ Page({
   onLoad(options) {
 
     this.setData({
-      //teamId: options.id
-      teamId: '100052'
+      teamId: options.id
+      //teamId: '100052'
     }, () => {
       this.getEmpowerNum()
     })

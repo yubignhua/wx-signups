@@ -48,6 +48,7 @@ Page({
 
   toEmpower(){
     let teamName = app.globalData.signUpData.group_name
+    let teamId = app.globalData.signUpData.group_id
     wx.navigateTo({
       url: `../empower/index?id=${teamId} `,
     })

@@ -4,28 +4,28 @@
   </view> 
   <view class="complate-title">
     <view class="complate-title-contant">报名成功</view>
-    <view class="complate-subtitle">{{memberName}}  与  {{memberNum}}  位朋友已加入阿拉善英雄会！</view>
+    <view class="complate-subtitle">{{memberName}}  与  {{memberNum}}  位朋友已加入2018英雄会！</view>
   </view>
 
   <view class="empower">
     <button bindtap="toEmpower">授权代领</button>
-    <view class="empower-info">
+    <!-- <view class="empower-info">
       <view>授权<text style="font-weight: 600">{{teamName}}</text>代领</view>
       <view>剩余{{teamNum?teamNum.num:0}}个名额</view>
       <view>{{teamNum?teamNum.dndtime:'9月25日'}}截止</view>
-    </view> 
+    </view>  -->
   </view>
 
   <view class="check-info">
     <view class="flex-item">
-      <image src="../../images/s_tab_icon_4.png"></image>
+      <image src="../../images/s_complate2.png"></image>
       <view>
         <view>英雄会官方</view>
         <view>地图与资讯</view>
       </view>
     </view>
     <button class="flex-item" bindtap="toOrder">
-      <image src="../../images/s_tab_icon_4.png"></image>
+      <image src="../../images/s_complate1.png"></image>
       <view>查看订单</view>
     </button>
   </view>
