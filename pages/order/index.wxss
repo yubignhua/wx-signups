@@ -52,7 +52,7 @@ page {
   padding-top: 45rpx;
 }
 .order-id view:nth-child(1){
-  font-size: 34rpx;
+  font-size: 30rpx;
   color: #000000;
   font-weight: 600;
 }

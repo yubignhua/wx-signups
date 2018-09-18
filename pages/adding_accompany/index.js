@@ -336,6 +336,9 @@ Page({
         payState: false
       })
       let mData = res.data;
+      if (mData.code == "1105"){
+
+      }
       //调起原生支付
       if (mData.code == "1000"){
         app.globalData.orderid = mData.data.orderid
@@ -362,7 +365,7 @@ Page({
             },
           })
       }else{
-        if(res.data.code === "1105"){
+        if(res.data.code == "1105"){
           wx.showToast({
             title: res.data.msg,
             icon: 'none'

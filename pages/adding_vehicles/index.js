@@ -27,7 +27,7 @@ Page({
 	onLoad: function () {
 		wx.pro.removeStorage("SIGNUP_CARLIST")
 		wx.pro.removeStorage("SIGNUP_FLAGLIST")
-  	
+  	console.log(app.globalData.signUpData,'6666666666')
   	
   	wx.pro.getStorage("SIGNUP_CARLIST").then(res =>{
 		  if(res && res.data && res.data.length>0){

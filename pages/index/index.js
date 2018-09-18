@@ -206,10 +206,11 @@ Page({
    * 选择散客
    */
   clickPerson() {
+    console.log(this.data.signState, this.data.signedType)
     this.countdown();
     if (this.data.signState){
       this.setData({
-        signButton: true,
+        signButton: false,
         team: 0,
         showModel: true,
         signType: 0
