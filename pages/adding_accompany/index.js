@@ -19,13 +19,15 @@ Page({
     nameState: true,
     idState: true,
     phoneState: true,
-
+    plusState: true,
+    payState: true
   },
 
   onLoad: function (options) {
     //获取车辆信息并添加随行人员字段
 	  //app.globalData.signUpData.detail.racer_info =  [{ name: '', idcard: '', mobile: '', eid: '' }]
     let raceInfo = app.globalData.signUpData.detail.racer_info;
+    
     for (let i = 0; i < raceInfo.length; i++) {
       raceInfo[i].personInsurance = [];
     }
@@ -33,7 +35,6 @@ Page({
       carList: raceInfo,
       allCost: raceInfo.length * 120
     })
-
   },
 
   /**
@@ -46,7 +47,7 @@ Page({
     for (var i = 0; i < datalist.length; i++) {
       personCost += datalist[i].personInsurance.length * 120
     }
-    var goodCost = this.data.goodNum * 60;
+    var goodCost = this.data.goodNum * 80;
 
     var all = goodCost + carCost + personCost;
     this.setData({
@@ -225,8 +226,10 @@ Page({
   /**
   * 表单提交
   */
-  formSubmit(e) {
-    this.data.mData = e.detail.value;
+  formSubmit (e) {
+    this.setData({
+      mData: e.detail.value
+    })
   },
   /**
    * 删除随行人员
@@ -247,6 +250,7 @@ Page({
    */
   delete() {
     var curGoodNum = this.data.goodNum;
+    
     if (curGoodNum <= 0) {
       curGoodNum = 0
     } else {
@@ -262,6 +266,17 @@ Page({
   //减
   plug() {
     var curGoodNum = this.data.goodNum;
+    if (curGoodNum >= app.globalData.signUpData.detail.racer_info.length) {
+      this.setData({
+        plusState: false
+      },()=>{
+        wx.showToast({
+          title: `每位报名人仅享受一份优惠手礼`,
+          icon: 'none'
+        })
+      })
+      return
+    }
     this.setData({
       goodNum: ++curGoodNum
     })
@@ -298,7 +313,7 @@ Page({
    * 立即支付(提交订单)
    */
   submitAllData() {
-    
+    let that = this;
     this.getAccompanyingPerson();
     app.globalData.signUpData.entry_info.mobile = app.globalData.signUpData.detail.racer_info[0].mobile;
     app.globalData.signUpData.detail.goods.gift[0].num = this.data.goodNum;
@@ -315,9 +330,12 @@ Page({
       // contentType:'text/html;charset=utf-8',
       data: { ...app.globalData.signUpData, times: new Date().getTime()}
     }).then((res) => {
+      this.setData({
+        payState: false
+      })
       let mData = res.data;
       //调起原生支付
-      if (mData.code === "1000"){
+      if (mData.code == "1000"){
         app.globalData.orderid = mData.data.orderid
         wx.requestPayment(
           {
@@ -336,7 +354,9 @@ Page({
               })
              },
             'fail': function (res) { 
-
+              that.setData({
+                payState: true
+              })
             },
           })
       }else{
@@ -364,7 +384,7 @@ Page({
 
 
   toNextPage: function () {
-    wx.navigateTo({
+    wx.redirectTo({
       url: "../adding_vehicles/index"
     })
   }

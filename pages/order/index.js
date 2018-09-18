@@ -10,7 +10,8 @@ Page({
       modelState: false,
       scrollState: true,
       mData: null,
-      showCode: false
+      showCode: false,
+      orderNumber: false
     },
     
     onLoad: function (options) {
@@ -28,12 +29,17 @@ Page({
         url: orderUrl,
         data: { 
           openid: app.globalData.signUpData.entry_info.openid,
-          orderid: app.globalData.orderid ? app.globalData.orderid:''
+          //orderid: app.globalData.orderid ? app.globalData.orderid:''
         },
         contentType: 'application/json;charset=utf-8',
         method: 'POST'
       }).then(( res )=>{
-        if(res.data.code === "1000"){
+        if(res.data.code != 1000){
+          this.setData({
+            orderNumber: false
+          })
+        }
+        if(res.data.code == "1000"){
           let gift = res.data.data && res.data.data.goods.gift;
           let giftNum = 0;
           if (gift && gift.length) {
@@ -43,7 +49,8 @@ Page({
           }
           res.data.data.goods.allNum = giftNum;
           this.setData({
-            orderList: res.data.data
+            orderList: res.data.data,
+            orderNumber: true
           })
         }
       })
@@ -81,8 +88,10 @@ Page({
   /**
    * 表单提交
    */
-  formSubmit(e) {
-    this.data.mData = e.detail.value;
+  formSubmit (e) {
+    this.setData({
+      mData: e.detail.value
+    })
   },
 
   /**
@@ -97,8 +106,13 @@ Page({
       })
       return;
     }
+    this.setData({
+      modelState: false
+    },()=>{
+      this.toNextPage(this.data.mData[`number`])
+    })
     
-    this.toNextPage( this.data.mData[`number`] )
+    
     
   },
 
@@ -111,7 +125,7 @@ Page({
   toEmpower(){
     if (!this.data.orderList.authoname){
       wx.navigateTo({
-        url: `../empower/index?id=${this.data.orderList.teamId}`
+        url: `../empower/index?id=${this.data.orderList.groupid}`
         //url: `../empower/index?id=100052`
       })
     }else{

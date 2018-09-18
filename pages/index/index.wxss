@@ -37,11 +37,12 @@ page {
 .model-title{
   padding: 52rpx 0 44rpx 40rpx;
   font-size: 36rpx;
-  color: #BEBEBE;
+  color: #000;
+  font-weight: 600;
 }
 .model-contant{
   padding: 0 40rpx;
-  font-size: 32rpx;
+  font-size: 28rpx;
   color: #000000;
 }
 .model-wrapper button{
@@ -49,14 +50,22 @@ page {
   height: 98rpx;
   line-height: 98rpx;
   background: #FFD446;
-  margin: 71rpx auto 55rpx auto;
+  margin: 71rpx auto 20rpx auto;
+  font-size: 24rpx;
+}
+.i-second{
+  margin: 0 auto 30rpx auto;
+  text-align: center;
+  color: #BABABA;
   font-size: 24rpx;
 }
 .hide-model{
   display: none;
 }
 
-
+.continue-grey{
+  background: #e6e6e6 !important;
+}
 
 .top-logo image{
   width: 232rpx;
@@ -141,7 +150,7 @@ page {
   padding: 0;
   background: #F5D000;
   font-size: 26rpx;
-  color: #FFFFFF;
+  color: #000;
   border-radius: 19rpx;
 }
 
@@ -154,9 +163,34 @@ page {
 .grey-style{
   background: #bababa;
 }
+.item-input {
+  height: 90rpx;
+  width: 80%;
+  border: 1px solid #e6e6e6;
+  border-radius: 45px;
+  padding-left: 40rpx;
+  text-align: left;
+}
 
+.section {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+.section + .section{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rpx;
+}
+.warm-tip{
+  color:#000;
+  padding-left:70rpx;
+  font-size:24rpx;
+  padding-bottom: 5rpx;
 
-
+}
 .index-container{
   font-family: PingFangSC-Semibold;
   width: 100%;

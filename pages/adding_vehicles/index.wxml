@@ -4,7 +4,7 @@
   </view>
   <view class="warm-tip">
     <view style='display:inline;color:#FFB202;margin-left:40rpx'>¥120</view>/份 包含保险,可获得一份车贴,凭此进营地</view>
-  <view class="warm-tip" style='display:inline;color:#FFB202;margin-left:40rpx'>注：车辆1的手机号为该订单联系人手机号</view>
+  <!--<view class="warm-tip" style='display:inline;color:#FFB202;margin-left:40rpx'>注：车辆1的手机号为该订单联系人手机号</view>-->
     
   <swiper class="m-swiper" indicator-dots="{{indicatorDots}}" vertical="{{false}}" previous-margin="20px" next-margin="20px" current="{{current}}" bindchange="change">
     <block wx:for="{{CarsList}}" wx:key="*this.iden">
@@ -15,7 +15,7 @@
               <view class='delete' bindtap='deleteCar' data-index="{{index}}">删除</view>
             </view>
             <view class="form-des">
-              <view class="left-block" />车辆{{index+1}}-保险收益人</view>
+              <view class="left-block" />车辆{{index+1}}-被保险人</view>
             <view wx:if="{{index == 0}}">
               <image class="right-left-img" src="../../images/s_vehicles_2.png"></image>
             </view>
