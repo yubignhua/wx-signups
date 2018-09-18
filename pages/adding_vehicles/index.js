@@ -162,10 +162,10 @@ Page({
    * 新增车辆
    */
   addCar(e){
-    // this.checkInput(this.data.mData);
-    // if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
-    //   return
-    // }
+    this.checkInput(this.data.mData);
+    if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
+      return
+    }
 		let flag = this.judgeRepeat(this.data.mData.idcard);
     if(flag) return;
     this.checkPerson(this.data.mData,res=>{
@@ -207,7 +207,7 @@ Page({
    */
 
   checkPerson(map={},callback,error){
-  	callback()
+  	//callback()
     wx.pro.request({
       url: identifyUrl,
       method: "POST",
