@@ -31,7 +31,8 @@ Page({
 				  CarsList:res.data
 		  		})
 		  }
-	  })
+	  });
+		
    	wx.pro.getStorage("SIGNUP_FLAGLIST").then(res =>{
 		  if(res && res.data && res.data.length>0){
 		  	this.setData({
@@ -54,7 +55,7 @@ Page({
    * 删除车辆
    */
   deleteCar(event){
-  	var {dataList,CarsList,flagList,lastData} = this.data;
+  	let {dataList,CarsList,flagList,lastData} = this.data;
     let index = event.currentTarget.dataset['index'];
     dataList.splice(index, 1);
     CarsList.splice(index, 1);
@@ -229,7 +230,7 @@ Page({
    * 点击下一步提交所有数据
    */
   submitAllData(){
-  	console.log("lastData.idcard::",this.data.lastData.idcard)
+  //	console.log("lastData.idcard::",this.data.lastData.idcard)
 	  let flag = this.judgeRepeat(this.data.lastData.idcard);
 	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
