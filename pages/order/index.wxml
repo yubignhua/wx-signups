@@ -2,7 +2,7 @@
 <view class="checkorder-container">
   <scroll-view scroll-y="{{scrollState}}" style="height: 100%">
   <view class="{{ checkState?'hiden-node':'' }}">
-    <view wx:if="{{!orderList}}" class="no-order order-price">
+    <view wx:if="{{!orderNumber}}" class="no-order order-price">
       暂无订单
     </view>
     <button wx:else class="check-order" bindtap="checkOrder">
@@ -26,13 +26,13 @@
           <image src="../../images/s_right_arrow.png" class="arrow-img"></image>
         </view>
       </button>
-      <button class="flex-layout order-code" bindtap="toEmpower">
+      <!-- <button class="flex-layout order-code" bindtap="toEmpower">
         <view>找人代领</view>
         <view class="empower">
           <view>{{orderList.authoname?orderList.authoname:'未授权'}}</view>
           <image src="../../images/s_right_arrow.png" class="arrow-img"></image>
         </view>
-      </button>
+      </button> -->
     </view>
   <!-- 订单详情 -->
     <view class="order-info-contant">

@@ -19,7 +19,8 @@ Page({
     nameState: true,
     idState: true,
     phoneState: true,
-    plusState: true
+    plusState: true,
+    payState: true
   },
 
   onLoad: function (options) {
@@ -34,7 +35,6 @@ Page({
       carList: raceInfo,
       allCost: raceInfo.length * 120
     })
-
   },
 
   /**
@@ -311,7 +311,7 @@ Page({
    * 立即支付(提交订单)
    */
   submitAllData() {
-    
+    let that = this;
     this.getAccompanyingPerson();
     app.globalData.signUpData.entry_info.mobile = app.globalData.signUpData.detail.racer_info[0].mobile;
     app.globalData.signUpData.detail.goods.gift[0].num = this.data.goodNum;
@@ -328,6 +328,9 @@ Page({
       // contentType:'text/html;charset=utf-8',
       data: { ...app.globalData.signUpData, times: new Date().getTime()}
     }).then((res) => {
+      this.setData({
+        payState: false
+      })
       let mData = res.data;
       //调起原生支付
       if (mData.code === "1000"){
@@ -349,7 +352,9 @@ Page({
               })
              },
             'fail': function (res) { 
-
+              that.setData({
+                payState: true
+              })
             },
           })
       }else{

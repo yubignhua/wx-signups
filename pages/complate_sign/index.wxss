@@ -53,7 +53,7 @@ page {
   border-radius: 20rpx;
 }
 .check-info{
-  margin: 206rpx 60rpx 67rpx;
+  margin: 296rpx 60rpx 67rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;

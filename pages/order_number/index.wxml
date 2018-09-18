@@ -9,8 +9,8 @@
         <view>订单号：{{orderList.orderid}}</view>
         <view>报名板块：{{orderList.groupname}}</view>
       </view>
-      <view class="order-code" wx:if="{{orderList[0].authoname}}">已授权给{{orderList.authoname}}代领</view>
-      <view class="order-code" wx:else>未授权</view>
+      <!-- <view class="order-code" wx:if="{{orderList[0].authoname}}">已授权给{{orderList.authoname}}代领</view>
+      <view class="order-code" wx:else>未授权</view> -->
     </view>
   <!-- 订单详情 -->
     <view class="order-info-contant">

@@ -10,7 +10,8 @@ Page({
       modelState: false,
       scrollState: true,
       mData: null,
-      showCode: false
+      showCode: false,
+      orderNumber: false
     },
     
     onLoad: function (options) {
@@ -33,7 +34,12 @@ Page({
         contentType: 'application/json;charset=utf-8',
         method: 'POST'
       }).then(( res )=>{
-        if(res.data.code === "1000"){
+        if(res.data.code != 1000){
+          this.setData({
+            orderNumber: false
+          })
+        }
+        if(res.data.code == "1000"){
           let gift = res.data.data && res.data.data.goods.gift;
           let giftNum = 0;
           if (gift && gift.length) {
@@ -43,7 +49,8 @@ Page({
           }
           res.data.data.goods.allNum = giftNum;
           this.setData({
-            orderList: res.data.data
+            orderList: res.data.data,
+            orderNumber: true
           })
         }
       })

@@ -85,7 +85,7 @@ Page({
               signState: false,
               teamName: res.data.data.groupname == '散客' ? '请选择大队' : res.data.data.groupname,
               signedType: res.data.data.groupname == '散客' ? false : true,
-              teamId: res.data.data.groupid,
+              teamId: res.data.data.groupid || '100052',
               teamNames: res.data.data.groupname
             })
           }

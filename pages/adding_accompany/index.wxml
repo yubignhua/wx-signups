@@ -72,7 +72,7 @@
       <view bindtap='showOrder' style='color:#3D4045;display:inline-block;float:right;margin-right:20rpx;font-size:22rpx'>明细</view>
 
     </view>
-    <button bindtap='submitAllData' class="next">立即支付</button>
+    <button bindtap='submitAllData' class="next" disabled="{{!payState}}">立即支付</button>
   </view>
 
  <view class="model sheet {{visible2?'':'hide-model'}}" bindtap='showOrder'></view>
