@@ -1,10 +1,9 @@
 {
     "pages": [
-
+      "pages/adding_vehicles/index",
       "pages/index/index",
       "pages/adding_accompany/index",
       "pages/complate_sign/index",
-      "pages/adding_vehicles/index",
 
         "pages/order_number/index",
         "pages/order/index",

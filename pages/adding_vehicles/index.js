@@ -25,6 +25,10 @@ Page({
   },
 	
 	onLoad: function () {
+		wx.pro.removeStorage("SIGNUP_CARLIST")
+		wx.pro.removeStorage("SIGNUP_FLAGLIST")
+  	
+  	
   	wx.pro.getStorage("SIGNUP_CARLIST").then(res =>{
 		  if(res && res.data && res.data.length>0){
 		  	this.setData({
@@ -58,12 +62,12 @@ Page({
    * 删除车辆
    */
   deleteCar(event){
-  	let {dataList,CarsList,flagList,lastData} = this.data;
+  	
     let index = event.currentTarget.dataset['index'];
-    dataList.splice(index, 1);
-    CarsList.splice(index, 1);
-    flagList.splice(index, 1);
-    CarsList[CarsList.length-1] = lastData;
+    this.data.dataList.splice(index, 1);
+    this.data.CarsList.splice(index, 1);
+    this.data.flagList.splice(index, 1);
+    //this.data.CarsList[this.data.CarsList.length-1] = this.data.lastData;
     let curState = 0;
     if(index === 0)
       curState = index;
@@ -78,6 +82,8 @@ Page({
 	  //本地缓存汽车列表
 	  wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
 	  wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
+	  
+	  console.log('detet----.CarsList',this.data.CarsList)
 	
   },
   /**
@@ -137,7 +143,8 @@ Page({
 	judgeRepeat(id){
 		let {CarsList} = this.data;
 		console.log("id::::",id);
-		console.log("CarsList::::",CarsList)
+		console.log("CarsList::::",CarsList);
+		if(CarsList.length<=1) return;
 		let isRepeat = CarsList.some((item)=>{
 			if(item.idcard === id){
 				return true;
@@ -156,10 +163,10 @@ Page({
    * 新增车辆
    */
   addCar(e){
-    this.checkInput(this.data.mData);
-    if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
-      return
-    }
+    // this.checkInput(this.data.mData);
+    // if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
+    //   return
+    // }
 		let flag = this.judgeRepeat(this.data.mData.idcard);
     if(flag) return;
     this.checkPerson(this.data.mData,res=>{
@@ -177,6 +184,8 @@ Page({
       //本地缓存汽车列表
 	    wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
 	    wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
+	    
+	    console.log("add carList",this.data.CarsList)
     },res=>{
       if(res.data.code == 1008){
         wx.showToast({
@@ -199,6 +208,7 @@ Page({
    */
 
   checkPerson(map={},callback,error){
+  	callback()
     wx.pro.request({
       url: identifyUrl,
       method: "POST",
