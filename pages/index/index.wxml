@@ -18,10 +18,10 @@
                 bindchange="bindTeamChange" 
                 value="{{teamList[team].groupid}}" 
                 range="{{teamList}}"
-                range-key="{{'newName'}}"
+                range-key="{{'name'}}"
                 disabled="{{!signState}}">
       <button class="team">
-        <view>{{signState?teamList[team].newName : teamName }}</view>
+        <view>{{signState?teamList[team].name : teamName }}</view>
         <image src="../../images/s_index_4.png"></image>
       </button>
     </picker>

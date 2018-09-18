@@ -15,7 +15,7 @@
               <view class='delete' bindtap='deleteCar' data-index="{{index}}">删除</view>
             </view>
             <view class="form-des">
-              <view class="left-block" />车辆{{index+1}}-被保险收益人</view>
+              <view class="left-block" />车辆{{index+1}}-被保险人</view>
             <view wx:if="{{index == 0}}">
               <image class="right-left-img" src="../../images/s_vehicles_2.png"></image>
             </view>
