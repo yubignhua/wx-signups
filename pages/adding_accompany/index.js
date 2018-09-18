@@ -328,7 +328,10 @@ Page({
             'signType': mData.data.signType,
             'paySign': mData.data.paySign,
             'success': function (res) {
-              wx.redirectTo({
+              //支付成功删除本地缓存
+	            wx.pro.removeStorage("SIGNUP_CARLIST");
+	            wx.pro.removeStorage("SIGNUP_FLAGLIST");
+	            wx.redirectTo({
                 url: '../complate_sign/index',
               })
              },

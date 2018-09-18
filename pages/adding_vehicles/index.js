@@ -23,8 +23,24 @@ Page({
     nextFlag:true
 
   },
-
-  onShow: function () {},
+	
+	onLoad: function () {
+  	wx.pro.getStorage("SIGNUP_CARLIST").then(res =>{
+		  if(res && res.data && res.data.length>0){
+		  	this.setData({
+				  CarsList:res.data
+		  		})
+		  }
+	  })
+   	wx.pro.getStorage("SIGNUP_FLAGLIST").then(res =>{
+		  if(res && res.data && res.data.length>0){
+		  	this.setData({
+				  flagList:res.data
+		  		})
+		  }
+	  })
+  
+  },
 
 
   /**
@@ -55,6 +71,10 @@ Page({
       flagList: this.data.flagList,
       current: curState,
     })
+	  //本地缓存汽车列表
+	  wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
+	  wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
+	
   },
   /**
    * 校验表单
@@ -70,9 +90,7 @@ Page({
         content: '请填写正确的用户名',
         showCancel: false,
         confirmColor: "#000000"
-
-
-      })
+      });
       nameState = false
     }else{
       nameState = true
@@ -144,7 +162,6 @@ Page({
       //将新添加的 车辆数据 插入到数组的倒数第二位
       this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
 	    this.data.flagList.splice(this.data.flagList.length - 1, 0, true);
-	
 	    this.data.dataList.push(this.data.mData);
       this.setData({
         CarsList: this.data.CarsList,
@@ -152,7 +169,10 @@ Page({
         flagList: this.data.flagList,
         dataList: this.data.dataList,
         lastData: {}
-      })
+      });
+      //本地缓存汽车列表
+	    wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
+	    wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
     },res=>{
       if(res.data.code == 1008){
         wx.showToast({
