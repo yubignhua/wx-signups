@@ -47,6 +47,7 @@ Page({
    * 表单提交
    */
   formSubmit (e) {
+    console.log(e.detail.value,'=======')
     this.setData({
       mData: e.detail.value
     })
@@ -256,7 +257,7 @@ Page({
 			    lastData:{}
 		    });
 		    //页面跳转
-		    wx.redirectTo({
+		    wx.navigateTo({
 			    url: '../adding_accompany/index'
 		    })
 	    },res=>{
@@ -285,7 +286,7 @@ Page({
 		      success:res=>{
 		        if(res.confirm){
 			        app.globalData.signUpData.detail.racer_info = this.data.dataList;
-			        wx.redirectTo({
+              wx.navigateTo({
 				        url: '../adding_accompany/index'
 			        })
             }
@@ -311,7 +312,7 @@ Page({
 				    lastData:{}
 			    });
 			    //页面跳转
-			    wx.redirectTo({
+          wx.navigateTo({
 				    url: '../adding_accompany/index'
 			    })
 		    },res=>{

@@ -17,7 +17,7 @@
       <view class="order-info-contant-title">订单详情</view>
       <view wx:if="{{orderList.racer_info.info.length}}">
         <view class="item-insurance">
-          <view class="item-insurance-title">车辆-保险受益人</view>
+          <view class="item-insurance-title">车辆-被保险人</view>
           <view class="order-price"><text style="color:#FFD446">￥120</text>×{{orderList.racer_info.info.length}}</view>
         </view>
         <view class="item-insurance-info">

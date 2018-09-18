@@ -218,7 +218,7 @@ Page({
    * 倒计时
    */
   countdown() {
-    if (!this.data.second) {
+    if (this.data.second<=1) {
       this.setData({
         identifyState: true,
         second: 60

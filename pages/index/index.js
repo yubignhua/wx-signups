@@ -80,7 +80,7 @@ Page({
    * 倒计时
    */
   countdown() {
-    if (!this.data.second) {
+    if (this.data.second<=1) {
       this.setData({
         continueButtonState: true
       })
@@ -249,8 +249,8 @@ Page({
    * 选择大队
    */
   selectTeam(event) {
-    if (this.data.signState){
 
+    if (this.data.signState){
       if (this.data.signButton){
         this.countdown();
         this.setData({
@@ -274,6 +274,7 @@ Page({
           confirmColor: '#000000'
         })
       }else{
+        this.countdown();
         this.setData({
           showModel: event.target.dataset.visible,
           signType: 1
