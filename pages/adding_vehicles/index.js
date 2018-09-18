@@ -14,7 +14,7 @@ Page({
     previousMargin: 0,
     nextMargin: 0,
     state0:0,
-    mData:{},//当前表单数据
+    mData:{eid:''},//当前表单数据
     dataList: [],//车辆数据列表
     nameState: true,
     idState: true,
@@ -160,7 +160,7 @@ Page({
 	/**
    * 新增车辆
    */
-  addCar(e){
+  addCar(){
   	console.log('========',this.data.mData)
     this.checkInput(this.data.mData);
     if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
@@ -170,20 +170,23 @@ Page({
     if(flag) return;
     this.checkPerson(this.data.mData,res=>{
       //将新添加的 车辆数据 插入到数组的倒数第二位
-      this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
-	    this.data.flagList.splice(this.data.flagList.length - 1, 0, true);
-	    this.data.dataList.push(this.data.mData);
-      this.setData({
-        CarsList: this.data.CarsList,
-        current: this.data.CarsList.length - 1,
-        flagList: this.data.flagList,
-        dataList: this.data.dataList,
-        lastData: {}
-      });
-      //本地缓存汽车列表
-	    wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
-	    wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
-	    
+      // this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
+      // this.data.flagList.splice(this.data.flagList.length - 1, 0, true);
+      // this.data.dataList.push(this.data.mData);
+      // this.setData({
+      //   CarsList: this.data.CarsList,
+      //   current: this.data.CarsList.length - 1,
+      //   flagList: this.data.flagList,
+      //   dataList: this.data.dataList,
+      //   lastData: {}
+      // });
+      // //本地缓存汽车列表
+      // wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
+      // wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
+      //
+      //
+	
+	    this.plugDataCalc(this.data.mData);
 	    console.log("add carList",this.data.CarsList)
     },res=>{
       if(res.data.code == 1008){
@@ -232,10 +235,12 @@ Page({
   change4(e) {
     this.data.lastData.eid = e.detail.value;
   },
-	
-	
+	/**
+	 * 添加车辆 数据处理
+	 * @param data
+	 */
 	plugDataCalc(data){
-		
+		//将新添加的 车辆数据 插入到数组的倒数第二位
 		this.data.CarsList.splice(this.data.CarsList.length - 1, 0, data);
 		this.data.flagList.splice(this.data.flagList.length - 1, 0, true);
 		this.data.dataList.push(data);
@@ -244,15 +249,11 @@ Page({
 			current: this.data.CarsList.length - 1,
 			flagList: this.data.flagList,
 			dataList: this.data.dataList,
-			lastData: {},
-			nextFlag: true,
-			lastData:{}
+			lastData:{eid:''}
 		});
 		//本地缓存汽车列表
 		wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
 		wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
-		
-		
 	},
 	
 	
@@ -285,15 +286,8 @@ Page({
 		    // this.data.dataList.push(lastData);
 		    this.plugDataCalc(lastData)
 		    app.globalData.signUpData.detail.racer_info = this.data.dataList;
-		
-		
-		
-		
-		    
-		
 		    this.setData({
 			    nextFlag: true,
-			    lastData:{}
 		    });
 		    //页面跳转
 		    wx.navigateTo({
@@ -355,7 +349,6 @@ Page({
 			    app.globalData.signUpData.detail.racer_info = this.data.dataList;
 			    this.setData({
 				    nextFlag: true,
-				    lastData:{}
 			    });
 			    //页面跳转
           wx.navigateTo({
