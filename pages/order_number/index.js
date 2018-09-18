@@ -9,7 +9,10 @@ Page({
     },
     
     onLoad: function (options) {
-        this.getOrder(options.number);
+        this.number = options.number;
+    },
+  onShow(options){
+      this.getOrder(this.number);
     },
 
 

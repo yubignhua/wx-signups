@@ -19,13 +19,14 @@ Page({
     nameState: true,
     idState: true,
     phoneState: true,
-
+    plusState: true
   },
 
   onLoad: function (options) {
     //获取车辆信息并添加随行人员字段
 	  //app.globalData.signUpData.detail.racer_info =  [{ name: '', idcard: '', mobile: '', eid: '' }]
     let raceInfo = app.globalData.signUpData.detail.racer_info;
+    
     for (let i = 0; i < raceInfo.length; i++) {
       raceInfo[i].personInsurance = [];
     }
@@ -46,7 +47,7 @@ Page({
     for (var i = 0; i < datalist.length; i++) {
       personCost += datalist[i].personInsurance.length * 120
     }
-    var goodCost = this.data.goodNum * 60;
+    var goodCost = this.data.goodNum * 80;
 
     var all = goodCost + carCost + personCost;
     this.setData({
@@ -247,6 +248,7 @@ Page({
    */
   delete() {
     var curGoodNum = this.data.goodNum;
+    
     if (curGoodNum <= 0) {
       curGoodNum = 0
     } else {
@@ -262,6 +264,17 @@ Page({
   //减
   plug() {
     var curGoodNum = this.data.goodNum;
+    if (curGoodNum >= app.globalData.signUpData.detail.racer_info.length) {
+      this.setData({
+        plusState: false
+      },()=>{
+        wx.showToast({
+          title: `最多购买${curGoodNum}份`,
+          icon: 'none'
+        })
+      })
+      return
+    }
     this.setData({
       goodNum: ++curGoodNum
     })
@@ -364,7 +377,7 @@ Page({
 
 
   toNextPage: function () {
-    wx.navigateTo({
+    wx.redirectTo({
       url: "../adding_vehicles/index"
     })
   }

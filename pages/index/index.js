@@ -23,7 +23,7 @@ Page({
       teamName: '',
       signedType: true,
       teamId: 0,
-      teamName: ''
+      teamNames: ''
     },
     
     onLoad(options) {
@@ -77,18 +77,20 @@ Page({
               orderid: ''
           }
       }).then((res)=>{
-          if( Object.keys(res.data.data.racer_info).length ){
-              this.setData({
-                  signButton: true,
-                  showModel: false,
-                  signState: false,
-                  teamName: res.data.data.groupname == '散客' ? '请选择大队' : res.data.data.groupname,
-                  signedType: res.data.data.groupname == '散客' ? false: true,
-                //teamId: res.data.data.groupid
-                teamId: "100052",
-                teamName: res.data.data.groupname
-              })
+        if(res.data.code == 1000){
+          if (Object.keys(res.data.data.racer_info).length) {
+            this.setData({
+              signButton: true,
+              showModel: false,
+              signState: false,
+              teamName: res.data.data.groupname == '散客' ? '请选择大队' : res.data.data.groupname,
+              signedType: res.data.data.groupname == '散客' ? false : true,
+              teamId: res.data.data.groupid,
+              teamNames: res.data.data.groupname
+            })
           }
+        }
+          
       })
     },
 
@@ -250,8 +252,8 @@ Page({
         team_id = this.data.teamList[this.data.team].groupid
         team_name = this.data.teamList[this.data.team].name
       }else{
-        team_id = this.data.teamId
-        team_name = this.data.teamName
+        team_id = this.data.teamId || '100052'
+        team_name = this.data.teamNames
       }
     }else{
       team_id = 0
@@ -259,7 +261,7 @@ Page({
     }
     app.globalData.signUpData.group_id = team_id;
     app.globalData.signUpData.group_name = team_name;
-    wx.navigateTo({
+    wx.redirectTo({
       url: "../adding_vehicles/index"
     })
   }

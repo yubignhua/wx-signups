@@ -28,7 +28,7 @@ Page({
         url: orderUrl,
         data: { 
           openid: app.globalData.signUpData.entry_info.openid,
-          orderid: app.globalData.orderid ? app.globalData.orderid:''
+          //orderid: app.globalData.orderid ? app.globalData.orderid:''
         },
         contentType: 'application/json;charset=utf-8',
         method: 'POST'
@@ -97,8 +97,13 @@ Page({
       })
       return;
     }
+    this.setData({
+      modelState: false
+    },()=>{
+      this.toNextPage(this.data.mData[`number`])
+    })
     
-    this.toNextPage( this.data.mData[`number`] )
+    
     
   },
 

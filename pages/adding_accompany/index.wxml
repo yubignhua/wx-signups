@@ -50,13 +50,13 @@
       <view class="good_des">
         <view class="good_title">购买手礼</view>
         <view class="good_content">
-          <span style="color:#FFB202">¥60</span>/份</view>
+          <span style="color:#FFB202">¥80</span>/份</view>
         </view>
       </view>
     <view class="good_calc">
       <button style="border: none" bindtap='delete' class='calc_delet calc_item' plain>－</button>
       <view class='calc_num calc_item'>{{goodNum}}</view>
-      <button style="border: none" bindtap='plug' class='calc_plug calc_item' plain>＋</button>
+      <button style="border: none" bindtap='plug' class="calc_plug calc_item {{plusState?'':'grey-style'}}" plain>＋</button>
     </view>
 
 
@@ -81,7 +81,7 @@
         <view style='padding:30rpx'>
         <view class='good-item'> <span>XXX保险</span> <span>....................</span> <span><span style="color:#FFB202">¥120</span>  ×  {{carList.length+accompanyingPerson}}份</span></view>
         <view class='good-item'> <span>车贴</span> <span>....................</span> <span><span style="color:#FFB202">¥0</span>  ×  {{carList.length}}份</span></view>
-        <view class='good-item'> <span>手礼</span> <span>....................</span> <span><span style="color:#FFB202" >¥60</span>  ×  {{goodNum}}份</span></view>
+        <view class='good-item'> <span>手礼</span> <span>....................</span> <span><span style="color:#FFB202" >¥80</span>  ×  {{goodNum}}份</span></view>
         </view>
 
 

@@ -28,8 +28,8 @@ page {
   margin-right: 16rpx;
 }
 
-.car-contant{
-  
+.grey-style{
+  color: #e6e6e6;
 }
 .person-content{
   margin: 26rpx 0rpx 49rpx;

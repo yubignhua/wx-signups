@@ -328,9 +328,7 @@ Page({
 				    nextFlag: true
 			    })
 		    })
-		
 	    }
-      
     }
   }
 })
