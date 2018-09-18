@@ -134,6 +134,12 @@ Page({
       })
     }
     
+  },
+  showTip() {
+    wx.showToast({
+      title: '暂时无法授权',
+      icon: 'none'
+    })
   }
 })
 

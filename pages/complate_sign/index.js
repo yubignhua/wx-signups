@@ -71,5 +71,11 @@ Page({
       path: 'pages/index/index'
 
     }
+  },
+  showTip(){
+    wx.showToast({
+      title: '暂时无法授权',
+      icon: 'none'
+    })
   }
 })

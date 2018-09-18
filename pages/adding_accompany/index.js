@@ -372,7 +372,9 @@ Page({
           title: res.msg || "提交订单失败",
           icon: "none"
         })
-
+        that.setData({
+          payState: true
+        })
       }
 
     }).catch(res => {
