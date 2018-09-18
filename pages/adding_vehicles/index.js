@@ -125,11 +125,14 @@ Page({
 	 */
 	judgeRepeat(id){
 		let raceInfo = this.data.CarsList;
+		console.log("id::::::",id)
+		console.log(":::::::",raceInfo)
 		let isRepeat = raceInfo.some((item,index)=>{
 			if(item.idcard === id){
 				return true;
 			}
 		});
+		console.log("isRepeat::::",isRepeat)
 		if(isRepeat){
 			wx.showToast({
 				title: "不能重复购买保险",
@@ -226,7 +229,8 @@ Page({
    * 点击下一步提交所有数据
    */
   submitAllData(){
-	  let flag = this.judgeRepeat(this.data.mData.idcard);
+  	console.log("lastData.idcard::",this.data.lastData.idcard)
+	  let flag = this.judgeRepeat(this.data.lastData.idcard);
 	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
     console.log('CarsList:::',CarsList)
