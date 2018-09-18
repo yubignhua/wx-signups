@@ -44,13 +44,44 @@
   </view>
   <view class="model-wrapper {{showModel?'':'hide-model'}}">
         <view class="model-title">报名须知</view>
-        <view class="model-contant">
-          <text>
-          1.本届英雄会依旧对任何人免费开放!\n 
-          2.需要进入营地的车辆必须至少购买一份保险 【价格￥120】 以获得“入营车贴”，以此车贴为车辆入营地的唯一凭证。\n
-          3.建议为随行人员也购买保险，尽情享受沙漠活动。
-          </text>
+        <scroll-view scroll-y style="height: 450rpx;">
+          <view class="model-contant">
+            <text>
+              1.本届英雄会主会场免费开放（部分场地付费进入）。\n
+              2.需要进入营地的车辆必须至少购买一份人身安全保险（￥120），以获得入营车贴，该车贴作为车辆入营唯一凭证。\n
+              3.沙漠活动有风险，须为每一位随行人员购买人身安全保险。\n
+              4.系统支持多人报名，但为便于数据统计及更好的提供数据服务，同时满足腾讯仅支持最大单笔支付上限5000元的限制，推荐参会者各自完成报名，尽量避免大团队统一报名。\n
+              5.不必担心各自报名就必须各自排队领取无聊，报名截止后，可通过订单页的订单合并功能，自由选择合并订单并授权集体领取车贴物料。\n
+            </text>
+          </view>
+        </scroll-view>
+        <button bindtap="{{!signState?'continueSign':'addInfo'}}" disabled="{{!continueButtonState}}">继续</button>
+        <view class="i-second" wx:if="{{!continueButtonState}}">{{second}}秒后点击继续</view>
+  </view>
+
+  <view class="model {{visible?'':'hide-model'}}">
+    <image src="../../images/popbox_closed@3x.png" bindtap="closeInfo" data-visible="{{false}}"></image>
+  </view>
+  <view wx:if="{{visible}}" class="model-wrapper {{visible?'':'hide-model'}}">
+    <view class="model-title">订单管理人</view>
+    <form bindsubmit="formSubmit">
+      <view class="model-contant">
+        <view class="section">
+          <input placeholder-class="phcolor" class='item-input' name="name" placeholder="姓名" />
         </view>
-        <button bindtap="continueSign">继续</button> 
-  </view> 
+        <view class="section">
+          <input placeholder-class="phcolor" class='item-input' name="idcard" type="idcard" placeholder="身份证" />
+        </view>
+        <view class="warm-tip">该身份证用于领取物料（必须携带）</view>
+        <view class="section" style="margin-bottom: 5rpx">
+          <input placeholder-class="phcolor" class='item-input' name="mobile" type="mobile" placeholder="手机号" />
+        </view>
+        <view class="warm-tip">该手机号作为订单联系人</view>
+      </view>
+
+      <button formType="submit" bindtap="checkInfo">确定</button>
+    </form>
+  </view>
+
+  
 </view>

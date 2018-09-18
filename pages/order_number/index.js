@@ -28,7 +28,7 @@ Page({
       },
       method: 'POST'
     }).then((res) => {
-      if(res.data.code === "1000"){
+      if(res.data.code == "1000"){
         let gift = res.data.data && res.data.data.goods.gift;
         let giftNum = 0;
         if (gift && gift.length) {

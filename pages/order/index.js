@@ -123,7 +123,7 @@ Page({
   toEmpower(){
     if (!this.data.orderList.authoname){
       wx.navigateTo({
-        url: `../empower/index?id=${this.data.orderList.teamId}`
+        url: `../empower/index?id=${this.data.orderList.groupid}`
         //url: `../empower/index?id=100052`
       })
     }else{

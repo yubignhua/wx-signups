@@ -8,7 +8,7 @@
   </view>
 
   <view class="empower">
-    <!-- <button bindtap="toEmpower">授权代领</button> -->
+    <button bindtap="toEmpower">授权代领</button>
     <!-- <view class="empower-info">
       <view>授权<text style="font-weight: 600">{{teamName}}</text>代领</view>
       <view>剩余{{teamNum?teamNum.num:0}}个名额</view>

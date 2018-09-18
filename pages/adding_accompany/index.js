@@ -269,7 +269,7 @@ Page({
         plusState: false
       },()=>{
         wx.showToast({
-          title: `最多购买${curGoodNum}份`,
+          title: `每位报名人仅享受一份优惠手礼`,
           icon: 'none'
         })
       })
@@ -333,7 +333,7 @@ Page({
       })
       let mData = res.data;
       //调起原生支付
-      if (mData.code === "1000"){
+      if (mData.code == "1000"){
         app.globalData.orderid = mData.data.orderid
         wx.requestPayment(
           {
