@@ -14,11 +14,10 @@ Page({
     },
     
     onLoad: function (options) {
-      let openId = app.globalData.signUpData.entry_info.openid;
-      let orderId = app.globalData.orderid;
-      if (openId ){
-        this.getOrder()
-      }
+      
+    },
+    onShow(){
+      this.getOrder()
     },
 
     /**
@@ -34,13 +33,12 @@ Page({
         contentType: 'application/json;charset=utf-8',
         method: 'POST'
       }).then(( res )=>{
-        console.log(res)
         if(res.data.code === "1000"){
           let gift = res.data.data && res.data.data.goods.gift;
           let giftNum = 0;
           if (gift && gift.length) {
             gift.map((item, index) => {
-              giftNum += item.num
+              giftNum = Number(giftNum) + Number(item.num)
             })
           }
           res.data.data.goods.allNum = giftNum;
@@ -55,7 +53,6 @@ Page({
      * 展示二维码
      */
   changeCodeModel(e){
-    console.log(e)
     if ( !this.data.orderList.authoname ){
       this.setData({
         showCode: e.target.dataset.visible
@@ -114,7 +111,8 @@ Page({
   toEmpower(){
     if (!this.data.orderList.authoname){
       wx.navigateTo({
-        url: `../empower/index?name=${this.data.orderList.groupname}&id=${this.data.orderList.teamId}`
+        url: `../empower/index?id=${this.data.orderList.teamId}`
+        //url: `../empower/index?id=100052`
       })
     }else{
       wx.showToast({

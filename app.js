@@ -14,7 +14,7 @@ App({
       mid: '',//赛事 id
       entry_info: {
         openid: '',
-        mobile: '15010462956'
+        mobile: ''
       },//报名人信息
       group_id: "", //大队id
       group_name: "", //大队姓名

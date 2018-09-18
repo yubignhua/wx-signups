@@ -20,14 +20,20 @@ Page({
       count: 0,
       signType: 0,
       signState: true,
+      teamName: '',
+      signedType: true,
+      teamId: 0,
       teamName: ''
     },
     
     onLoad(options) {
-        this.weixinLogin();
+        
         this.getCompetition();
         this.getTeamList();
     },
+  onShow(option) {
+    this.weixinLogin();
+  },
 
     /**
      * 微信登录
@@ -73,10 +79,14 @@ Page({
       }).then((res)=>{
           if( Object.keys(res.data.data.racer_info).length ){
               this.setData({
-                  signButton: false,
+                  signButton: true,
                   showModel: false,
                   signState: false,
-                teamName: res.data.data.groupname == '散客' ? '请选择大队' : res.data.data.groupname
+                  teamName: res.data.data.groupname == '散客' ? '请选择大队' : res.data.data.groupname,
+                  signedType: res.data.data.groupname == '散客' ? false: true,
+                //teamId: res.data.data.groupid
+                teamId: "100052",
+                teamName: res.data.data.groupname
               })
           }
       })
@@ -150,48 +160,105 @@ Page({
    * 选择散客
    */
   clickPerson() {
-    this.data.signState?
-    this.setData({
-      signButton: true,
-      team: 0,
-      showModel: true,
-      signType: 0
-      }) : wx.showModal({
-        content: '您已生成过订单，请前往“订单”查看',
+    if (this.data.signState){
+      this.setData({
+        signButton: true,
+        team: 0,
+        showModel: true,
+        signType: 0
+      })
+    }
+    if (!this.data.signState && !this.data.signedType) {
+      this.setData({
+        signButton: true,
+        team: 0,
+        showModel: true,
+        signType: 0
+      })
+    }
+    if (!this.data.signState && this.data.signedType){
+      wx.showModal({
+        content: '请选择大队入口报名',
         showCancel: false,
         confirmText: '确定',
         confirmColor: '#000000'
       })
+    }
   },
-
   /**
-   * 选择大队
+   * 已经报名不可选大队
    */
-  changeModel(event) {
-    this.data.signButton?
-      this.setData({
-        showModel: event.target.dataset.visible,
-        signType: 1
-      }) : this.data.signState?
+  signTip(){
+    if(!this.data.signState && this.data.signedType){
       wx.showModal({
-        content: '请选择加入的大队',
+        content: '已选过大队，请直接报名',
         showCancel: false,
         confirmText: '知道了',
         confirmColor: '#000000'
-        }) : wx.showModal({
-          content: '您已生成过订单，请前往“订单”查看',
+      })
+    }
+  },
+  /**
+   * 选择大队
+   */
+  selectTeam(event) {
+    if (this.data.signState){
+      if (this.data.signButton){
+        this.setData({
+          showModel: event.target.dataset.visible,
+          signType: 1
+        })
+      }else{
+        wx.showModal({
+          content: '请选择加入的大队',
+          showCancel: false,
+          confirmText: '知道了',
+          confirmColor: '#000000'
+        })
+      }
+    }else{
+      if (!this.data.signedType){
+        wx.showModal({
+          content: '请选择散客入口',
           confirmText: '确定',
           showCancel: false,
           confirmColor: '#000000'
         })
+      }else{
+        this.setData({
+          showModel: event.target.dataset.visible,
+          signType: 1
+        })
+      }
+    }
+  },
+
+  changeModel(){
+    this.setData({
+      showModel: false
+    })
   },
 
   continueSign(){
     this.setData({
       showModel: false
     })
-    app.globalData.signUpData.group_id = this.data.signType?this.data.teamList[this.data.team].groupid:0;
-    app.globalData.signUpData.group_name = this.data.signType?this.data.teamList[this.data.team].name:'';
+    let team_id,
+        team_name;
+    if (this.data.signType){
+      if(this.data.signState){
+        team_id = this.data.teamList[this.data.team].groupid
+        team_name = this.data.teamList[this.data.team].name
+      }else{
+        team_id = this.data.teamId
+        team_name = this.data.teamName
+      }
+    }else{
+      team_id = 0
+      team_name = ''
+    }
+    app.globalData.signUpData.group_id = team_id;
+    app.globalData.signUpData.group_name = team_name;
     wx.navigateTo({
       url: "../adding_vehicles/index"
     })

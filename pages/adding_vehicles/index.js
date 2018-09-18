@@ -154,7 +154,6 @@ Page({
       return
     }
 		let flag = this.judgeRepeat(this.data.mData.idcard);
-    console.log("flag::::",flag)
     if(flag){
       return;
     }
@@ -173,7 +172,6 @@ Page({
         dataList: this.data.dataList,
         lastData: {}
       })
-      console.log(res,'resres')
     },res=>{
       if(res.data.code == 1008){
         wx.showToast({
@@ -207,6 +205,11 @@ Page({
     }).then((res) => {
       if(res.data.code == 1000){
         callback(res);
+      } else if (res.data.code == 1007){
+        wx.showToast({
+          title: res.data.msg,
+          icon: "none"
+        })
       }else{
         error(res);
       }
@@ -233,7 +236,7 @@ Page({
 	  let flag = this.judgeRepeat(this.data.lastData.idcard);
 	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
-    console.log('CarsList:::',CarsList)
+    app.globalData.signUpData.entry_info.mobile = CarsList[0].mobile;
     if(CarsList.length == 1){
 	    this.checkInput(lastData);
 	    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
