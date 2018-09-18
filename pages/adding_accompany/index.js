@@ -226,8 +226,10 @@ Page({
   /**
   * 表单提交
   */
-  formSubmit(e) {
-    this.data.mData = e.detail.value;
+  formSubmit (e) {
+    this.setData({
+      mData: e.detail.value
+    })
   },
   /**
    * 删除随行人员

@@ -47,7 +47,9 @@ Page({
    * 表单提交
    */
   formSubmit (e) {
-    this.data.mData = e.detail.value;
+    this.setData({
+      mData: e.detail.value
+    })
   },
 
   /**
@@ -248,6 +250,7 @@ Page({
 	    this.checkPerson(lastData,res => {
 		    this.data.dataList.push(lastData);
 		    app.globalData.signUpData.detail.racer_info = this.data.dataList;
+        console.log(this.data.dataList)
 		    this.setData({
 			    nextFlag: true,
 			    lastData:{}
