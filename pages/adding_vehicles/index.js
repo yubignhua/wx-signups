@@ -137,6 +137,7 @@ Page({
 		let {CarsList} = this.data;
 		console.log("id::::",id);
 		console.log("CarsList::::",CarsList)
+    if(CarsList.length<=1) return false;
 		let isRepeat = CarsList.some((item)=>{
 			if(item.idcard === id){
 				return true;
@@ -205,11 +206,6 @@ Page({
     }).then((res) => {
       if(res.data.code == 1000){
         callback(res);
-      } else if (res.data.code == 1007){
-        wx.showToast({
-          title: res.data.msg,
-          icon: "none"
-        })
       }else{
         error(res);
       }
@@ -234,6 +230,7 @@ Page({
   submitAllData(){
   	console.log("lastData.idcard::",this.data.lastData.idcard)
 	  let flag = this.judgeRepeat(this.data.lastData.idcard);
+    console.log('333333333333',this.data.nextFlag)
 	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
     app.globalData.signUpData.entry_info.mobile = CarsList[0].mobile;
@@ -242,9 +239,11 @@ Page({
 	    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
 		    return
 	    }
+	    console.log('222222222')
 	    if(flag){
 		    return;
 	    }
+	    console.log('1111111111')
 	    this.setData({
 		    nextFlag: false
 	    });
@@ -261,13 +260,19 @@ Page({
 			    url: '../adding_accompany/index'
 		    })
 	    },res=>{
+	      console.log('666666666')
 		    //验证失败
-		    if(res.data.code == 1008){
+		    if(res.data.code == 1008 ){
 			    wx.showToast({
 				    title: "不能重复报名",
 				    icon: 'none'
 			    })
-		    }else{
+		    }else if(res.data.code == 1007){
+          wx.showToast({
+            title: "姓名与身份证号不匹配",
+            icon: 'none'
+          })
+        } else{
 			    wx.showToast({
 				    title: "实名认证失败",
 				    icon: 'none'

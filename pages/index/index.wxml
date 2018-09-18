@@ -74,7 +74,7 @@
         </view>
         <view class="warm-tip">该身份证用于领取物料（必须携带）</view>
         <view class="section" style="margin-bottom: 5rpx">
-          <input placeholder-class="phcolor" class='item-input' name="mobile" type="mobile" placeholder="手机号" />
+          <input placeholder-class="phcolor" class='item-input' name="mobile" type="mobile" placeholder="手机号" type="number"/>
         </view>
         <view class="warm-tip">该手机号作为订单联系人</view>
       </view>
