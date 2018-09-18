@@ -341,7 +341,7 @@ border-radius:0
   width:100%;
   position: absolute;
   bottom:110rpx;
-  height: 400rpx;
+  /*height: 400rpx;*/
   background:#F8F8F8;
   z-index: 200;
 

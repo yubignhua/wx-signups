@@ -81,7 +81,7 @@
         <view style='padding:30rpx'>
         <view class='good-item'> <span>XXX保险</span> <span>....................</span> <span><span style="color:#FFB202">¥120</span>  ×  {{carList.length+accompanyingPerson}}份</span></view>
         <view class='good-item'> <span>车贴</span> <span>....................</span> <span><span style="color:#FFB202">¥0</span>  ×  {{carList.length}}份</span></view>
-        <view class='good-item'> <span>手礼</span> <span>....................</span> <span><span style="color:#FFB202" >¥80</span>  ×  {{goodNum}}份</span></view>
+        <view class='good-item' wx:if="{{goodNum}}"> <span>手礼</span> <span>....................</span> <span><span style="color:#FFB202" >¥80</span>  ×  {{goodNum}}份</span></view>
         </view>
 
 
