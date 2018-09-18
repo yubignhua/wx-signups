@@ -19,7 +19,7 @@ Page({
     nameState: true,
     idState: true,
     phoneState: true,
-    lastData:{},
+    lastData:{eid:''},
     nextFlag:true
 
   },
@@ -62,7 +62,6 @@ Page({
    * 删除车辆
    */
   deleteCar(event){
-  	
     let index = event.currentTarget.dataset['index'];
     this.data.dataList.splice(index, 1);
     this.data.CarsList.splice(index, 1);
@@ -162,6 +161,7 @@ Page({
    * 新增车辆
    */
   addCar(e){
+  	console.log('========',this.data.mData)
     this.checkInput(this.data.mData);
     if (!this.data.nameState || !this.data.idState || !this.data.phoneState){
       return
@@ -232,18 +232,43 @@ Page({
   change4(e) {
     this.data.lastData.eid = e.detail.value;
   },
+	
+	
+	plugDataCalc(data){
+		
+		this.data.CarsList.splice(this.data.CarsList.length - 1, 0, data);
+		this.data.flagList.splice(this.data.flagList.length - 1, 0, true);
+		this.data.dataList.push(data);
+		this.setData({
+			CarsList: this.data.CarsList,
+			current: this.data.CarsList.length - 1,
+			flagList: this.data.flagList,
+			dataList: this.data.dataList,
+			lastData: {},
+			nextFlag: true,
+			lastData:{}
+		});
+		//本地缓存汽车列表
+		wx.pro.setStorage("SIGNUP_CARLIST",this.data.CarsList);
+		wx.pro.setStorage("SIGNUP_FLAGLIST",this.data.flagList);
+		
+		
+	},
+	
+	
+	
 
   /**
    * 点击下一步提交所有数据
    */
   submitAllData(){
-  //	console.log("lastData.idcard::",this.data.lastData.idcard)
+  console.log(".lastData::",this.data.lastData)
 	  let flag = this.judgeRepeat(this.data.lastData.idcard);
-    console.log('333333333333',this.data.nextFlag)
+    console.log('333333333333')
 	  if (!this.data.nextFlag) return;
     let {CarsList,lastData} = this.data;
     app.globalData.signUpData.entry_info.mobile = CarsList[0].mobile;
-    if(CarsList.length == 1){
+    if(CarsList.length == 1){//只有一辆车
 	    this.checkInput(lastData);
 	    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
 		    return
@@ -257,9 +282,15 @@ Page({
 		    nextFlag: false
 	    });
 	    this.checkPerson(lastData,res => {
-		    this.data.dataList.push(lastData);
+		    // this.data.dataList.push(lastData);
+		    this.plugDataCalc(lastData)
 		    app.globalData.signUpData.detail.racer_info = this.data.dataList;
-        console.log(this.data.dataList)
+		
+		
+		
+		
+		    
+		
 		    this.setData({
 			    nextFlag: true,
 			    lastData:{}
@@ -291,8 +322,8 @@ Page({
 			    nextFlag: true
 		    })
 	    })
-    }else{
-      if(!lastData.name || !lastData.mobile || !lastData.idcard){
+    }else{//多辆车
+      if(!lastData.name || !lastData.mobile || !lastData.idcard){//当前车辆信息填写不完成
 	      wx.showModal({
 		      title: '提示',
 		      content: `由于车辆${CarsList.length}填写的信息不全,添加车辆${CarsList.length}将不会生效,是否继续?`,
@@ -307,7 +338,7 @@ Page({
           }
 	      })
       }
-	    if(lastData.name && lastData.mobile && lastData.idcard){
+	    if(lastData.name && lastData.mobile && lastData.idcard){//当前车辆信息填写完整
 		    this.checkInput(lastData);
 		    if (!this.data.nameState || !this.data.idState || !this.data.phoneState) {
 			    return
@@ -319,7 +350,8 @@ Page({
 			    nextFlag: false
 		    });
 		    this.checkPerson(lastData,res => {
-			    this.data.dataList.push(lastData);
+			    //this.data.dataList.push(lastData);
+			    this.plugDataCalc(lastData);
 			    app.globalData.signUpData.detail.racer_info = this.data.dataList;
 			    this.setData({
 				    nextFlag: true,

@@ -28,6 +28,8 @@ Page({
 	  //app.globalData.signUpData.detail.racer_info =  [{ name: '', idcard: '', mobile: '', eid: '' }]
     let raceInfo = app.globalData.signUpData.detail.racer_info;
     
+    console.log('raceInfo:::',raceInfo)
+    
     for (let i = 0; i < raceInfo.length; i++) {
       raceInfo[i].personInsurance = [];
     }
