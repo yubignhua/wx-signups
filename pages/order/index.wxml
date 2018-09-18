@@ -26,7 +26,7 @@
           <image src="../../images/s_right_arrow.png" class="arrow-img"></image>
         </view>
       </button>
-      <button class="flex-layout order-code" bindtap="toEmpower">
+      <button class="flex-layout order-code" bindtap="showTip">
         <view>找人代领</view>
         <view class="empower">
           <view>{{orderList.authoname?orderList.authoname:'未授权'}}</view>
