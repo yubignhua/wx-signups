@@ -25,13 +25,13 @@
                 <input placeholder-class="phcolor" id="name{{item.index}}" onchange="change1"  class='item-input' name="name" value='{{item.name}}' placeholder="姓名" disabled="{{flagList[index]}}" type="text" confirm-type="done"/>
               </view>
               <view class="section">
-                <input placeholder-class="phcolor" id="iden{{item.index}}" onchange="change2" class='item-input' name="idcard" value='{{item.iden}}' placeholder="身份证" disabled="{{flagList[index]}}" type="idcard"/>
+                <input placeholder-class="phcolor" id="iden{{item.index}}" onchange="change2" class='item-input' name="idcard" value='{{item.idcard}}' placeholder="身份证" disabled="{{flagList[index]}}" type="idcard"/>
               </view>
               <view class="section">
-                <input placeholder-class="phcolor" id="phone{{item.index}}" onchange="change3" class='item-input' name="mobile" value='{{item.phone}}' placeholder="手机号" disabled="{{flagList[index]}}" type="number"/>
+                <input placeholder-class="phcolor" id="phone{{item.index}}" onchange="change3" class='item-input' name="mobile" value='{{item.mobile}}' placeholder="手机号" disabled="{{flagList[index]}}" type="number"/>
               </view>
               <view class="section">
-                <input placeholder-class="phcolor" id="e_id{{item.index}}" onchange="change4" class='item-input' name="eid" value='{{item.e_id}}' placeholder="越野e族ID" disabled="{{flagList[index]}}" />
+                <input placeholder-class="phcolor" id="e_id{{item.index}}" onchange="change4" class='item-input' name="eid" value='{{item.eid}}' placeholder="越野e族ID" disabled="{{flagList[index]}}" />
               </view>
             </view>
           </view>

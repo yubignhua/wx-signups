@@ -24,20 +24,7 @@ Page({
 
   },
 
-  onShow: function () {
-    // let receInfo = app.globalData.signUpData.detail.racer_info;
-    // if (receInfo.length === 0){
-    //   this.setData({
-    //     CarsList: [{ name: '', iden: '', phone: '', e_id: '' }]
-    //   })
-    // }else{
-    //   let datalist = receInfo;
-    //   //datalist.push({ name: '', iden: '', phone: '', e_id: '' })
-    //   this.setData({
-    //     CarsList: datalist
-    //   })
-    // }
-  },
+  onShow: function () {},
 
 
   /**
