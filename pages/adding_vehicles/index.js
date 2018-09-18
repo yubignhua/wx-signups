@@ -144,8 +144,6 @@ Page({
     if(flag){
       return;
     }
-    
-    
     this.checkPerson(this.data.mData,res=>{
       //将新添加的 车辆数据 插入到数组的倒数第二位
       this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
@@ -267,7 +265,7 @@ Page({
       if(!lastData.name || !lastData.mobile || !lastData.idcard){
 	      wx.showModal({
 		      title: '提示',
-		      content: '由于您填写的信息不全,此次添加不会生效,是否继续?',
+		      content: `由于车辆${CarsList.length}填写的信息不全,添加车辆${CarsList.length}将不会生效,是否继续?`,
 		      confirmColor:"#000000",
 		      success:res=>{
 		        if(res.confirm){
@@ -323,14 +321,5 @@ Page({
 	    }
       
     }
-    
-    
-    
-  
-
-
- 
-
-   
   }
 })
