@@ -38,10 +38,12 @@ Page({
    * 删除车辆
    */
   deleteCar(event){
+  	var {dataList,CarsList,flagList,lastData} = this.data;
     let index = event.currentTarget.dataset['index'];
-    this.data.dataList.splice(index, 1);
-    this.data.CarsList.splice(index, 1);
-    this.data.flagList.splice(index, 1);
+    dataList.splice(index, 1);
+    CarsList.splice(index, 1);
+    flagList.splice(index, 1);
+    CarsList[CarsList.length-1] = lastData;
     let curState = 0;
     if(index === 0)
       curState = index;
@@ -111,15 +113,14 @@ Page({
 	 * @param id
 	 */
 	judgeRepeat(id){
-		let raceInfo = this.data.CarsList;
-		console.log("id::::::",id)
-		console.log(":::::::",raceInfo)
-		let isRepeat = raceInfo.some((item,index)=>{
+		let {CarsList} = this.data;
+		console.log("id::::",id);
+		console.log("CarsList::::",CarsList)
+		let isRepeat = CarsList.some((item)=>{
 			if(item.idcard === id){
 				return true;
 			}
 		});
-		console.log("isRepeat::::",isRepeat)
 		if(isRepeat){
 			wx.showToast({
 				title: "不能重复购买保险",
@@ -128,9 +129,6 @@ Page({
 		}
 		return isRepeat;
 	},
-	
-	
-	
 	
 	/**
    * 新增车辆
@@ -141,13 +139,11 @@ Page({
       return
     }
 		let flag = this.judgeRepeat(this.data.mData.idcard);
-    if(flag){
-      return;
-    }
+    if(flag) return;
     this.checkPerson(this.data.mData,res=>{
       //将新添加的 车辆数据 插入到数组的倒数第二位
       this.data.CarsList.splice(this.data.CarsList.length - 1, 0, this.data.mData);
-	    this.data.flagList.splice(this.data.flagList.length - 1, 0, true)
+	    this.data.flagList.splice(this.data.flagList.length - 1, 0, true);
 	
 	    this.data.dataList.push(this.data.mData);
       this.setData({
@@ -171,10 +167,6 @@ Page({
       }
       
     })
-
-    
-   
-
   },
 
 
@@ -276,7 +268,6 @@ Page({
             }
           }
 	      })
-        
       }
 	    if(lastData.name && lastData.mobile && lastData.idcard){
 		    this.checkInput(lastData);
