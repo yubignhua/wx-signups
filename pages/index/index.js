@@ -107,6 +107,15 @@ Page({
               orderid: ''
           }
       }).then((res)=>{
+        // this.setData({
+        //   signButton: true,
+        //   showModel: false,
+        //   signState: false,
+        //   teamName: '请选择大队',
+        //   signedType: false,
+        //   teamId: '0',
+        //   teamNames: '散客'
+        // })
         if(res.data.code == 1000){
           if (Object.keys(res.data.data.racer_info).length) {
             this.setData({
@@ -218,7 +227,7 @@ Page({
     }
     if (!this.data.signState && !this.data.signedType) {
       this.setData({
-        signButton: true,
+        signButton: false,
         team: 0,
         showModel: true,
         signType: 0
@@ -287,8 +296,10 @@ Page({
   changeModel(){
     this.setData({
       showModel: false,
-      second: 5
+      second: 5,
+      
     })
+
     clearTimeout(this.timmer)
   },
 
