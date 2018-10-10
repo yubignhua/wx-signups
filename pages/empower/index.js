@@ -90,6 +90,9 @@ Page({
         })
       }
     }
+
+
+
   },
 
   changeModel() {
@@ -230,5 +233,9 @@ Page({
       this.countdown()
     }, 1000)
   }
+<<<<<<< HEAD
   ///////////
+=======
+  //修改test
+>>>>>>> dev
 })
